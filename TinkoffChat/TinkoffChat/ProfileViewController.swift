@@ -8,6 +8,9 @@
 import UIKit
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    @IBAction func backButtonPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     
     //var delegate: LogoDelegate?
     //инициалы пользователя при отсутсвующей фотографии пользователя
