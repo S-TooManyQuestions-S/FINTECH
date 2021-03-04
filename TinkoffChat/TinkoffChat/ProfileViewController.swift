@@ -101,20 +101,27 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         Logger.logFieldValue(field: "editButton", value: "\(editButton.frame)", in: #function)
+        
         //Размеры frame'ов разные, главной причиной данных отличий является рассчет фреймов непосрдественно после добавления subview's, на момент viewDidLoad они добавлены не были, а значит и рассчет их рамзеров не производился (размер их такой же как и в IB)
         //правильное описание: В данный момент View уже отобразилась на экране устройства. Уже отработал механизм autolayout для текущего устройства. Так как в сториборд файле и эмуляторе выбраны устройства с разными экранами (iphone se 2 и iphone 11), то и фреймы editButton в них разные
         
     }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        //установка закргуленных углов у view, которое представляет аватарку пользователя
+        userIcon?.layer.cornerRadius = userIcon.frame.size.height/2
+        //установка закругленных углов у пока скрытой UIImageView, в которую (по желанию пользователя будет сохранена фотография
+        userImage?.layer.cornerRadius = userImage.frame.size.height/2
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //Правильное описание: В данный момент View только загрузилась из связанного storyboard файла и frame указаны в соответствии с текущими значениями для выбранного в сториборд устройстве.
         Logger.logFieldValue(field: "editButton", value: "\(editButton.frame)", in: #function)
     
-        //установка закргуленных углов у view, которое представляет аватарку пользователя
-        userIcon?.layer.cornerRadius = userIcon.frame.size.height/2
-        //установка закругленных углов у пока скрытой UIImageView, в которую (по желанию пользователя будет сохранена фотография
-        userImage?.layer.cornerRadius = userImage.frame.size.height/2
+        
         //регулируем размеры шрифта в зависимости от размера iconView
         iconLabel?.font = UIFont.systemFont(ofSize: userIcon.frame.width / 2)
         //устанавливаем закругленные углы у кнопки "Edit"
