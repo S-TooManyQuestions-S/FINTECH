@@ -8,7 +8,8 @@
 import UIKit
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    
+    //var delegate: LogoDelegate?
     //инициалы пользователя при отсутсвующей фотографии пользователя
     @IBOutlet weak var iconLabel: UILabel!
     //фотография профиля пользователя (default isHidden - true)
@@ -24,7 +25,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         //удаляем ошибочно выставленный констрейнт
-        alert.removeRedundantConstraint()
+        //alert.removeRedundantConstraint()
         //создание actionSheet с возможными путями задания фотографии пользователя (выбор из галлереи или снимок)
         alert.addAction(UIAlertAction(title: "Choose from gallery", style: .default , handler:{ (UIAlertAction)in
             self.chooseFromGallery()
@@ -83,26 +84,31 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         pickerController.dismiss(animated: true, completion: nil)
         if let image = info[.originalImage] as? UIImage{
             userImage.image = image
+            //delegate?.displayLogo(image)
             userImage.isHidden = false
         }
     }
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
+//    required init?(coder: NSCoder) {
+//        super.init(coder: coder)
         //Logger.logProcess(fullDescription: "Edit button frame in <init?> is: \(editButton.frame)")
         //На данном этапе editButton имеет значение nil
+        //Правильное описание: view еще не загрузилась - дочерние вьюшки еще не существуют, тоесть nil.
+    
         //Когда вы перетаскиваете объект на раскадровку и настраиваете его, Interface Builder сериализует состояние этого объекта на диске, а затем десериализует его, когда раскадровка появляется на экране. Вам нужно рассказать Interface Builder, как это сделать, для этого вызывается метод init, однако при вызове кнопка editButton еще не инициализирована, десериализация только началась
-    }
+   // }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         Logger.logFieldValue(field: "editButton", value: "\(editButton.frame)", in: #function)
         //Размеры frame'ов разные, главной причиной данных отличий является рассчет фреймов непосрдественно после добавления subview's, на момент viewDidLoad они добавлены не были, а значит и рассчет их рамзеров не производился (размер их такой же как и в IB)
+        //правильное описание: В данный момент View уже отобразилась на экране устройства. Уже отработал механизм autolayout для текущего устройства. Так как в сториборд файле и эмуляторе выбраны устройства с разными экранами (iphone se 2 и iphone 11), то и фреймы editButton в них разные
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Правильное описание: В данный момент View только загрузилась из связанного storyboard файла и frame указаны в соответствии с текущими значениями для выбранного в сториборд устройстве.
         Logger.logFieldValue(field: "editButton", value: "\(editButton.frame)", in: #function)
     
         //установка закргуленных углов у view, которое представляет аватарку пользователя
@@ -118,6 +124,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
 }
 
+/*
 extension UIAlertController{
     func removeRedundantConstraint(){
         for subView in self.view.subviews {
@@ -128,4 +135,6 @@ extension UIAlertController{
         }
     }
 }
+*/
+
 

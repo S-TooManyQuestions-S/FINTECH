@@ -7,18 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A113F6325EFEABD00FB643C /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A113F6125EFEABD00FB643C /* MessageCell.swift */; };
+		6A113F6425EFEABD00FB643C /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A113F6225EFEABD00FB643C /* MessageCell.xib */; };
+		6A113F6725EFEAD200FB643C /* MessageCellConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A113F6625EFEAD200FB643C /* MessageCellConfiguration.swift */; };
+		6A113F6A25EFEAE000FB643C /* MessageCellDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A113F6925EFEAE000FB643C /* MessageCellDataModel.swift */; };
 		6A40B7AF25E70A3E0057354F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A40B7AE25E70A3E0057354F /* ViewController.swift */; };
 		6A40B7B625E70E6F0057354F /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A40B7B525E70E6F0057354F /* Logger.swift */; };
+		6A41867325EE8B80001A9538 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A41867225EE8B7F001A9538 /* ConversationsListViewController.swift */; };
+		6A41867725EE8E4B001A9538 /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A41867525EE8E4B001A9538 /* ConversationCell.swift */; };
+		6A41867825EE8E4B001A9538 /* ConversationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A41867625EE8E4B001A9538 /* ConversationCell.xib */; };
+		6A41867D25EE92EC001A9538 /* ConversationCellConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A41867C25EE92EC001A9538 /* ConversationCellConfiguration.swift */; };
 		6A4B9CCE25DC2950000E5E29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4B9CCD25DC2950000E5E29 /* AppDelegate.swift */; };
 		6A4B9CD225DC2950000E5E29 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4B9CD125DC2950000E5E29 /* ProfileViewController.swift */; };
 		6A4B9CD525DC2950000E5E29 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A4B9CD325DC2950000E5E29 /* Main.storyboard */; };
 		6A4B9CD725DC2957000E5E29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A4B9CD625DC2957000E5E29 /* Assets.xcassets */; };
 		6A4B9CDA25DC2957000E5E29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A4B9CD825DC2957000E5E29 /* LaunchScreen.storyboard */; };
+		6ABFABAB25EEB88200E63521 /* ConversationCellDataModell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABFABAA25EEB88200E63521 /* ConversationCellDataModell.swift */; };
+		6AF9D28625EFDCF70087B1EE /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF9D28525EFDCF70087B1EE /* ConversationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6A113F6125EFEABD00FB643C /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		6A113F6225EFEABD00FB643C /* MessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
+		6A113F6625EFEAD200FB643C /* MessageCellConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellConfiguration.swift; sourceTree = "<group>"; };
+		6A113F6925EFEAE000FB643C /* MessageCellDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellDataModel.swift; sourceTree = "<group>"; };
 		6A40B7AE25E70A3E0057354F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6A40B7B525E70E6F0057354F /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		6A41867225EE8B7F001A9538 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
+		6A41867525EE8E4B001A9538 /* ConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
+		6A41867625EE8E4B001A9538 /* ConversationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationCell.xib; sourceTree = "<group>"; };
+		6A41867C25EE92EC001A9538 /* ConversationCellConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCellConfiguration.swift; sourceTree = "<group>"; };
 		6A4B9CCA25DC2950000E5E29 /* TinkoffChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinkoffChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A4B9CCD25DC2950000E5E29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6A4B9CD125DC2950000E5E29 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -26,6 +44,8 @@
 		6A4B9CD625DC2957000E5E29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6A4B9CD925DC2957000E5E29 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6A4B9CDB25DC2957000E5E29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6ABFABAA25EEB88200E63521 /* ConversationCellDataModell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCellDataModell.swift; sourceTree = "<group>"; };
+		6AF9D28525EFDCF70087B1EE /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +59,64 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6A113F6025EFEA5F00FB643C /* MessageCell */ = {
+			isa = PBXGroup;
+			children = (
+				6A113F6125EFEABD00FB643C /* MessageCell.swift */,
+				6A113F6225EFEABD00FB643C /* MessageCell.xib */,
+				6A113F6625EFEAD200FB643C /* MessageCellConfiguration.swift */,
+				6A113F6925EFEAE000FB643C /* MessageCellDataModel.swift */,
+			);
+			path = MessageCell;
+			sourceTree = "<group>";
+		};
+		6A41867A25EE9082001A9538 /* ConversationCell */ = {
+			isa = PBXGroup;
+			children = (
+				6A41867625EE8E4B001A9538 /* ConversationCell.xib */,
+				6A41867525EE8E4B001A9538 /* ConversationCell.swift */,
+				6A41867C25EE92EC001A9538 /* ConversationCellConfiguration.swift */,
+				6ABFABAA25EEB88200E63521 /* ConversationCellDataModell.swift */,
+			);
+			path = ConversationCell;
+			sourceTree = "<group>";
+		};
+		6A41867F25EE9E9C001A9538 /* ConversationsControllers */ = {
+			isa = PBXGroup;
+			children = (
+				6AF9D28525EFDCF70087B1EE /* ConversationViewController.swift */,
+				6A41867225EE8B7F001A9538 /* ConversationsListViewController.swift */,
+			);
+			path = ConversationsControllers;
+			sourceTree = "<group>";
+		};
+		6A41868125EEABCA001A9538 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				6A4B9CD825DC2957000E5E29 /* LaunchScreen.storyboard */,
+				6A4B9CD325DC2950000E5E29 /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		6A41868225EEABE9001A9538 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				6A4B9CDB25DC2957000E5E29 /* Info.plist */,
+				6A4B9CD625DC2957000E5E29 /* Assets.xcassets */,
+				6A4B9CCD25DC2950000E5E29 /* AppDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		6A41868425EEAC8A001A9538 /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				6A40B7B525E70E6F0057354F /* Logger.swift */,
+			);
+			path = Logger;
+			sourceTree = "<group>";
+		};
 		6A4B9CC125DC294F000E5E29 = {
 			isa = PBXGroup;
 			children = (
@@ -58,14 +136,14 @@
 		6A4B9CCC25DC2950000E5E29 /* TinkoffChat */ = {
 			isa = PBXGroup;
 			children = (
-				6A4B9CCD25DC2950000E5E29 /* AppDelegate.swift */,
+				6A113F6025EFEA5F00FB643C /* MessageCell */,
+				6A41868425EEAC8A001A9538 /* Logger */,
+				6A41868225EEABE9001A9538 /* App */,
+				6A41868125EEABCA001A9538 /* Storyboards */,
+				6A41867F25EE9E9C001A9538 /* ConversationsControllers */,
 				6A4B9CD125DC2950000E5E29 /* ProfileViewController.swift */,
-				6A4B9CD325DC2950000E5E29 /* Main.storyboard */,
-				6A4B9CD625DC2957000E5E29 /* Assets.xcassets */,
-				6A4B9CD825DC2957000E5E29 /* LaunchScreen.storyboard */,
-				6A4B9CDB25DC2957000E5E29 /* Info.plist */,
 				6A40B7AE25E70A3E0057354F /* ViewController.swift */,
-				6A40B7B525E70E6F0057354F /* Logger.swift */,
+				6A41867A25EE9082001A9538 /* ConversationCell */,
 			);
 			path = TinkoffChat;
 			sourceTree = "<group>";
@@ -127,9 +205,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A113F6425EFEABD00FB643C /* MessageCell.xib in Resources */,
 				6A4B9CDA25DC2957000E5E29 /* LaunchScreen.storyboard in Resources */,
 				6A4B9CD725DC2957000E5E29 /* Assets.xcassets in Resources */,
 				6A4B9CD525DC2950000E5E29 /* Main.storyboard in Resources */,
+				6A41867825EE8E4B001A9538 /* ConversationCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,9 +220,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A113F6725EFEAD200FB643C /* MessageCellConfiguration.swift in Sources */,
 				6A40B7AF25E70A3E0057354F /* ViewController.swift in Sources */,
+				6A113F6325EFEABD00FB643C /* MessageCell.swift in Sources */,
+				6A41867725EE8E4B001A9538 /* ConversationCell.swift in Sources */,
+				6AF9D28625EFDCF70087B1EE /* ConversationViewController.swift in Sources */,
+				6A113F6A25EFEAE000FB643C /* MessageCellDataModel.swift in Sources */,
+				6ABFABAB25EEB88200E63521 /* ConversationCellDataModell.swift in Sources */,
+				6A41867325EE8B80001A9538 /* ConversationsListViewController.swift in Sources */,
 				6A4B9CD225DC2950000E5E29 /* ProfileViewController.swift in Sources */,
 				6A4B9CCE25DC2950000E5E29 /* AppDelegate.swift in Sources */,
+				6A41867D25EE92EC001A9538 /* ConversationCellConfiguration.swift in Sources */,
 				6A40B7B625E70E6F0057354F /* Logger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,7 +380,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B25KHJDDT4;
-				INFOPLIST_FILE = TinkoffChat/Info.plist;
+				INFOPLIST_FILE = TinkoffChat/App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -312,7 +400,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B25KHJDDT4;
-				INFOPLIST_FILE = TinkoffChat/Info.plist;
+				INFOPLIST_FILE = TinkoffChat/App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
