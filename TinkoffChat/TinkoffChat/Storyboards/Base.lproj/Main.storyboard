@@ -134,16 +134,19 @@
                                         <color key="textColor" red="0.21176470588235294" green="0.21568627450980393" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="highlightedColor" systemColor="labelColor"/>
                                     </label>
-                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dpJ-wm-E3K">
-                                        <rect key="frame" x="-0.5" y="0.0" width="240" height="240"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dpJ-wm-E3K">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="240"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.89411764705882346" green="0.90980392156862744" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="XWE-Cc-8RV" firstAttribute="centerX" secondItem="6j0-jC-uZR" secondAttribute="centerX" id="7Yo-cu-ZGD"/>
+                                    <constraint firstItem="dpJ-wm-E3K" firstAttribute="leading" secondItem="6j0-jC-uZR" secondAttribute="leading" id="cU9-fB-7ds"/>
+                                    <constraint firstAttribute="trailing" secondItem="dpJ-wm-E3K" secondAttribute="trailing" id="eVm-8T-Fh1"/>
                                     <constraint firstAttribute="width" secondItem="6j0-jC-uZR" secondAttribute="height" multiplier="1:1" id="qK1-G4-1Du"/>
                                     <constraint firstItem="XWE-Cc-8RV" firstAttribute="centerY" secondItem="6j0-jC-uZR" secondAttribute="centerY" id="rr0-eF-N93"/>
+                                    <constraint firstItem="dpJ-wm-E3K" firstAttribute="top" secondItem="6j0-jC-uZR" secondAttribute="top" id="uMH-Ml-dCG"/>
+                                    <constraint firstAttribute="bottom" secondItem="dpJ-wm-E3K" secondAttribute="bottom" id="y2Y-S5-aCh"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UX/UI designer, web-designer Moscow, Russia" textAlignment="center" lineBreakMode="middleTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pWo-i6-jlS">
