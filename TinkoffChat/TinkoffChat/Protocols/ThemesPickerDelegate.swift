@@ -5,4 +5,8 @@
 //  Created by Андрей Самаренко on 10.03.2021.
 //
 
-import Foundation
+import UIKit
+
+protocol ThemesPickerDelegate {
+    func useCurrentTheme()
+}

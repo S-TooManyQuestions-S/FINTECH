@@ -131,6 +131,20 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         editButton?.layer.cornerRadius = 14
         //для корректной работы выбора фотографии из галлереи
         pickerController.delegate = self
+        
+        useCurrentTheme()
+    }
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var describeLabel: UILabel!
+    
+    func useCurrentTheme(){
+        let theme = ThemesManager.currentTheme()
+        editButton.backgroundColor = theme.getNavigationBarColor
+        view.backgroundColor = theme.getBackGroundColor
+        describeLabel.textColor = theme.getTextColor
+        nameLabel.textColor = theme.getTextColor
+        
     }
 }
 

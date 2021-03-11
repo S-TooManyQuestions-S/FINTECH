@@ -7,8 +7,13 @@
 
 import UIKit
 
-class ConversationsListViewController: UIViewController{
+class ConversationsListViewController: UIViewController, ThemesPickerDelegate{
+
     @IBOutlet weak var userButton: UIButton!
+    
+    @IBAction func settingsButtonPressed(_ sender: Any) {
+        performSegue(withIdentifier: "Settings", sender: nil)
+    }
     
     @IBAction func profileButtonPressed(_ sender: Any) {
          performSegue(withIdentifier: "ProfileID", sender: nil)
@@ -21,12 +26,8 @@ class ConversationsListViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        
-        userButton.layer.cornerRadius = userButton.frame.height/2
-        userButton.backgroundColor = UIColor(red: 250/255.0, green: 223/255.0, blue: 75/255.0, alpha: 1)
-        
+//        self.navigationController?.navigationBar.isTranslucent = true
+//        self.navigationController?.navigationBar.prefersLargeTitles = true
         
         messageTable.delegate = self
         messageTable.dataSource = self
@@ -34,6 +35,8 @@ class ConversationsListViewController: UIViewController{
         
         createTestMessages()
         title = "Tinkoff Chat"
+        
+        useCurrentTheme()
     }
 }
 
@@ -74,11 +77,17 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
                 return
             }
             destinationController.prepareView(with: currentCellData)
-//        case "ProfileID":
-//            guard let subView = segue.destination as? ProfileViewController else{
-//                return
-//            }
-//            subView.delegate = self
+        case "Settings":
+            guard
+                let destinationController = segue.destination as? ThemesViewController
+            else{
+                return
+            }
+            destinationController.themePickerDelegate = self
+            destinationController.themeHandlerClosure = {
+                            [weak self] in
+                            self?.useCurrentTheme()
+                        }
         default:
             return
         }
@@ -88,9 +97,32 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
                                 section: Int) -> String? {
         return testMessages[section].Status
     }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = ThemesManager.currentTheme().getTextColor
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2;
     }
+    
+    func useCurrentTheme() {
+        applyColors()
+        messageTable.reloadData()
+    }
+    
+    func applyColors(){
+        let currentTheme = ThemesManager.currentTheme()
+        view.backgroundColor = currentTheme.getBackGroundColor
+        messageTable.backgroundColor = currentTheme.getBackGroundColor
+        
+        navigationController?.navigationBar.backgroundColor = currentTheme.getBackGroundColor
+        navigationController?.navigationBar.barTintColor = currentTheme.getNavigationBarColor
+        navigationController?.navigationBar.tintColor = currentTheme.getTextColor
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: currentTheme.getTextColor]
+    }
+    
 }
 
 extension ConversationsListViewController{
@@ -130,17 +162,5 @@ extension ConversationsListViewController{
         dateFormatter.locale = Locale.current
         return dateFormatter.date(from: withStringForm)
     }
-    
 }
 
-/*
-protocol LogoDelegate {
-    func displayLogo(_ logo: UIImage)
-}
-
-extension ConversationsListViewController : LogoDelegate{
-    func displayLogo(_ logo: UIImage) {
-        userButton.setImage(logo, for: .normal)
-    }
-}
- */

@@ -11,6 +11,7 @@ class ConversationViewController: ViewController {
     @IBOutlet weak var dialogTable: UITableView!
     
     private let cellIdentifier = String(describing: MessageCell.self)
+    
     private static let testMessages = [
         MessageCellDataModel(message: nil, typeOf: .received),
         MessageCellDataModel(message: "Dm me as soon as possible, I have some business to discuss :0", typeOf: .received),
@@ -49,8 +50,11 @@ class ConversationViewController: ViewController {
         dialogTable.delegate = self
         dialogTable.dataSource = self
         
-        dialogTable.register(UINib(nibName: String(describing: MessageCell.self), bundle: nil), forCellReuseIdentifier: cellIdentifier)
+        navigationItem.backBarButtonItem?.title = "Tinkoff Chat"
         
+        dialogTable.register(UINib(nibName: String(describing: MessageCell.self), bundle: nil), forCellReuseIdentifier: cellIdentifier)
+        view.backgroundColor = ThemesManager.currentTheme().getBackGroundColor
+        dialogTable.backgroundColor = ThemesManager.currentTheme().getBackGroundColor
     }
 
     func prepareView(with inputCell: ConversationCellDataModel){

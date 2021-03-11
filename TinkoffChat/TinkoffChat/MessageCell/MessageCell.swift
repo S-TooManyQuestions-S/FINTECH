@@ -25,15 +25,17 @@ class MessageCell: UITableViewCell {
         setTextLabel(with: message.text)
         
         messageView.layer.cornerRadius = messageView.frame.height * 14/40
-        messageTextLabel.textColor = .black
         
         switch message.typeOf {
         case .received:
-            messageView.backgroundColor = UIColor(red: 232/255.0, green: 232/255.0, blue: 234/255.0, alpha:1)
+            messageTextLabel.textColor = ThemesManager.currentTheme().getInputMessageTextColor
+            messageView.backgroundColor = ThemesManager.currentTheme().getInputMessageColor
         case .sent:
-            messageView.backgroundColor = UIColor(red: 250/255.0, green: 223/255.0, blue: 75/255.0, alpha: 1)
+            messageTextLabel.textColor = ThemesManager.currentTheme().getOutputMessageTextColor
+            messageView.backgroundColor = ThemesManager.currentTheme().getOutPutMessageColor
             leftConstraint.isActive = false
         }
+        backgroundColor = ThemesManager.currentTheme().getBackGroundColor
     }
     
     override func prepareForReuse() {
