@@ -19,9 +19,10 @@ class ConversationCell: UITableViewCell {
         }else{
             userFullNameLabel.text = rawName
         }
+        userFullNameLabel.textColor = ThemesManager.currentTheme().getTextColor
     }
     
-    private func setLasMessage(with rawMessage: String?, isUnread:Bool){
+    private func setLastMessage(with rawMessage: String?, isUnread:Bool){
         let fontSize = self.lastMessageLabel.font.pointSize;
         if rawMessage == nil || rawMessage == ""{
             lastMessageLabel.font = UIFont(name: "AvenirNext-UltraLight", size: fontSize)
@@ -30,6 +31,7 @@ class ConversationCell: UITableViewCell {
             lastMessageLabel.font = isUnread ? .boldSystemFont(ofSize: fontSize) : .systemFont(ofSize: fontSize)
             lastMessageLabel.text = rawMessage
         }
+        lastMessageLabel.textColor = ThemesManager.currentTheme().getMessageTextColor
     }
     
     private func setLastMessageDate(with rawDate:Date?){
@@ -46,13 +48,14 @@ class ConversationCell: UITableViewCell {
         }
         
         lastMessageDateLabel.text =  dateFormatter.string(from: date)
+        lastMessageDateLabel.textColor = ThemesManager.currentTheme().getMessageTextColor
     }
     
     private func setCellBackground(isOnline: Bool){
         if isOnline{
-            backgroundColor = UIColor(red: 250/255.0, green: 223/255.0, blue: 75/255.0, alpha: 1)
+            backgroundColor = UIColor(red: 254/255.0, green: 248/255.0, blue: 130/255.0, alpha: 1)
         }else{
-            backgroundColor = .white
+            backgroundColor = ThemesManager.currentTheme().getBackGroundColor
         }
     }
     
@@ -60,7 +63,7 @@ class ConversationCell: UITableViewCell {
     func configure(with model: ConversationCellDataModel){
         setUserFullName(with: model.name)
         setLastMessageDate(with: model.date)
-        setLasMessage(with: model.message, isUnread: model.hasUnreadMessages)
+        setLastMessage(with: model.message, isUnread: model.hasUnreadMessages)
         setCellBackground(isOnline: model.online)
     }
 }
