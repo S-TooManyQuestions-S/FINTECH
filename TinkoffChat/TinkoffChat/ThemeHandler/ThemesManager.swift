@@ -11,11 +11,11 @@ struct ThemesManager{
     static let selectedThemeKey = "selectedThemeKey"
     
     static func currentTheme() -> Theme {
-        if let storedTheme = UserDefaults.standard.value(forKey: selectedThemeKey) as? Int{
-            return Theme(rawValue: storedTheme) ?? .classic
-      } else {
-        return .classic
-      }
+        guard let storedThemeID = UserDefaults.standard.value(forKey: selectedThemeKey) as? Int,
+              let theme = Theme(rawValue: storedThemeID)
+        else { return .classic }
+         
+        return theme
     }
     
     static func applyTheme(theme: Theme) {
