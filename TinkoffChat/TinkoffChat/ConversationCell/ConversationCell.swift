@@ -19,7 +19,7 @@ class ConversationCell: UITableViewCell {
         }else{
             userFullNameLabel.text = rawName
         }
-        userFullNameLabel.textColor = ThemesManager.currentTheme().getTextColor
+        userFullNameLabel.textColor = ThemesManager.getTheme().getTextColor
     }
     
     private func setLastMessage(with rawMessage: String?, isUnread:Bool){
@@ -31,7 +31,7 @@ class ConversationCell: UITableViewCell {
             lastMessageLabel.font = isUnread ? .boldSystemFont(ofSize: fontSize) : .systemFont(ofSize: fontSize)
             lastMessageLabel.text = rawMessage
         }
-        lastMessageLabel.textColor = ThemesManager.currentTheme().getMessageTextColor
+        lastMessageLabel.textColor = ThemesManager.getTheme().getMessageTextColor
     }
     
     private func setLastMessageDate(with rawDate:Date?){
@@ -48,14 +48,14 @@ class ConversationCell: UITableViewCell {
         }
         
         lastMessageDateLabel.text =  dateFormatter.string(from: date)
-        lastMessageDateLabel.textColor = ThemesManager.currentTheme().getMessageTextColor
+        lastMessageDateLabel.textColor = ThemesManager.getTheme().getMessageTextColor
     }
     
     private func setCellBackground(isOnline: Bool){
         if isOnline{
             backgroundColor = UIColor(red: 254/255.0, green: 248/255.0, blue: 130/255.0, alpha: 1)
         }else{
-            backgroundColor = ThemesManager.currentTheme().getBackGroundColor
+            backgroundColor = ThemesManager.getTheme().getBackGroundColor
         }
     }
     

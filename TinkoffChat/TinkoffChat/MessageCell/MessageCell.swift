@@ -26,16 +26,18 @@ class MessageCell: UITableViewCell {
         
         messageView.layer.cornerRadius = messageView.frame.height * 14/40
         
+        let currentTheme = ThemesManager.getTheme()
+        
         switch message.typeOf {
         case .received:
-            messageTextLabel.textColor = ThemesManager.currentTheme().getInputMessageTextColor
-            messageView.backgroundColor = ThemesManager.currentTheme().getInputMessageColor
+            messageTextLabel.textColor = currentTheme.getInputMessageTextColor
+            messageView.backgroundColor = currentTheme.getInputMessageColor
         case .sent:
-            messageTextLabel.textColor = ThemesManager.currentTheme().getOutputMessageTextColor
-            messageView.backgroundColor = ThemesManager.currentTheme().getOutPutMessageColor
+            messageTextLabel.textColor = currentTheme.getOutputMessageTextColor
+            messageView.backgroundColor = currentTheme.getOutPutMessageColor
             leftConstraint.isActive = false
         }
-        backgroundColor = ThemesManager.currentTheme().getBackGroundColor
+        backgroundColor = currentTheme.getBackGroundColor
     }
     
     override func prepareForReuse() {
