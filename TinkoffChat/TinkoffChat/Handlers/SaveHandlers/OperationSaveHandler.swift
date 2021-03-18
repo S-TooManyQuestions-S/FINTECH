@@ -71,11 +71,8 @@ class SaveTextDataOperation : Operation {
         do{
             if let textDataToSave = textDataToSave{
                 try handler?.saveText(text: textDataToSave, to: saveToPath)
-            }else{
-                handler?.errorOccuried = true
             }
         }catch{
-            print(error.localizedDescription)
             handler?.errorOccuried = true
         }
     }
@@ -97,11 +94,8 @@ class SaveImageDataOperation : Operation{
         do{
             if let imageDataToSave = image?.pngData(){
                 try handler?.saveImage(data: imageDataToSave)
-            }else{
-                handler?.errorOccuried = true
             }
         }catch{
-            print(error.localizedDescription)
             handler?.errorOccuried = true
         }
     }
@@ -122,11 +116,8 @@ class LoadTextDataOperation : Operation{
         guard !isCancelled else {
             return
         }
-        do{
-            loadedText = try handler?.loadText(from: pathForLoading)
-        }catch{
-            print(error.localizedDescription)
-        }
+        loadedText = try? handler?.loadText(from: pathForLoading)
+        
     }
 }
 
@@ -142,10 +133,7 @@ class LoadImageDataOperation : Operation{
         guard !isCancelled else {
             return
         }
-        do{
-            image = try handler?.loadImage()
-        }catch{
-            print(error.localizedDescription)
-        }
+        image = try? handler?.loadImage()
+        
     }
 }

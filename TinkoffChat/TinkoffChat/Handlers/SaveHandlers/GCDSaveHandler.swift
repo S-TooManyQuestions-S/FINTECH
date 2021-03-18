@@ -22,7 +22,6 @@ class GCDSaveHandler : FileInteractionHandler, SaveHandlerProtocol{
                     do {
                         try self.saveText(text: fullName, to: FileInteractionHandler.fullNameDataPath)
                     }catch {
-                        print(error.localizedDescription)
                         self.errorOccuried = true
                     }
                 }
@@ -35,7 +34,6 @@ class GCDSaveHandler : FileInteractionHandler, SaveHandlerProtocol{
                     do{
                         try self.saveText(text: description, to: FileInteractionHandler.descriptionDataPath)
                     }catch{
-                        print(error.localizedDescription)
                         self.errorOccuried = true
                     }
                 }
@@ -48,7 +46,6 @@ class GCDSaveHandler : FileInteractionHandler, SaveHandlerProtocol{
                     do{
                         try self.saveImage(data: data)
                     }catch{
-                        print(error.localizedDescription)
                         self.errorOccuried = true
                     }
                 }

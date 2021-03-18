@@ -37,7 +37,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     //other constants
     let pickerController = UIImagePickerController()
     let loadSaveHandlers:[SaveHandlerProtocol] = [GCDSaveHandler(), OperationSaveHandler()]
-    var savedUserData = UserProfile(fullName: "ФИО", description: "Your description goes here", profileImage: nil)
+    var savedUserData = UserProfile(fullName: "ФИО", description: "Your description goes here", profileImage: UIImage())
     
     
     @IBAction func backButtonPressed(_ sender: Any) {
@@ -215,9 +215,10 @@ extension ProfileViewController{
             self.present(alert, animated: true, completion: {
                 self.prepareForCurrentMode(editingMode: false)
                 self.loadingIndicator.stopAnimating()
+                self.loadData()
             })
         }else{
-            let alert = UIAlertController(title: "Failed!", message: "Your profile information wasn't saved due to occuried error!\nWouldyou like to try again?", preferredStyle: UIAlertController.Style.alert)
+            let alert = UIAlertController(title: "Failed!", message: "Your profile information wasn't saved due to occuried error!\nWould you like to try again?", preferredStyle: UIAlertController.Style.alert)
             
             alert.addAction(UIAlertAction(title: "Try again", style: UIAlertAction.Style.default, handler: {_ in
                 
@@ -233,7 +234,11 @@ extension ProfileViewController{
                                                        completion: self.showSaveAlert(isSuccessfull:isGCDUsed:))
                 }
             }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: {_ in
+                self.prepareForCurrentMode(editingMode: false)
+                self.loadSaveHandlers[0].writeData(newData: self.savedUserData, completion: {_,_ in return})
+                self.setUpProfile(loadedProfile: self.savedUserData)
+            }))
             
             self.present(alert, animated: true, completion: {
                 self.loadingIndicator.stopAnimating()

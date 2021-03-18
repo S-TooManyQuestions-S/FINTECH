@@ -392,15 +392,15 @@
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Additional information goes here, try to describe your professional experience or some hobbies, that you find interesting" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2YT-8A-gvX">
-                                <rect key="frame" x="43.5" y="325" width="288" height="73"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bouncesZoom="NO" editable="NO" text="Additional information goes here, try to describe your professional experience or some hobbies, that you find interesting" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2YT-8A-gvX">
+                                <rect key="frame" x="43.5" y="325" width="288" height="129.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="BBt-IL-vGC">
-                                <rect key="frame" x="177.5" y="406" width="20" height="20"/>
+                                <rect key="frame" x="177.5" y="462.5" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -415,7 +415,7 @@
                             <constraint firstItem="tLJ-IM-aLU" firstAttribute="top" secondItem="dpJ-wm-E3K" secondAttribute="bottom" constant="32" id="BR2-Q0-53l"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="I1i-y9-lzW" secondAttribute="bottom" constant="30" id="BeB-4h-HZl"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="I1i-y9-lzW" secondAttribute="trailing" constant="63.5" id="Kib-s2-t5z"/>
-                            <constraint firstItem="dpJ-wm-E3K" firstAttribute="leading" secondItem="1hV-6u-tnm" secondAttribute="trailing" constant="10.5" id="NEm-y4-rAs"/>
+                            <constraint firstItem="dpJ-wm-E3K" firstAttribute="leading" relation="lessThanOrEqual" secondItem="1hV-6u-tnm" secondAttribute="trailing" constant="10.5" id="NEm-y4-rAs"/>
                             <constraint firstItem="I1i-y9-lzW" firstAttribute="leading" relation="lessThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="63.5" id="Qn3-LM-pcP"/>
                             <constraint firstItem="BBt-IL-vGC" firstAttribute="top" secondItem="2YT-8A-gvX" secondAttribute="bottom" constant="8" symbolic="YES" id="RI5-aF-gCx"/>
                             <constraint firstItem="2YT-8A-gvX" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="TtE-VK-MYe"/>
@@ -424,7 +424,7 @@
                             <constraint firstItem="1zf-G3-8R8" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="eRW-w5-7do"/>
                             <constraint firstItem="1hV-6u-tnm" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="hIr-wo-79I"/>
                             <constraint firstItem="1zf-G3-8R8" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.14374" id="orT-sW-0uh"/>
-                            <constraint firstItem="2YT-8A-gvX" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.112828" id="qIt-1E-zdR"/>
+                            <constraint firstItem="2YT-8A-gvX" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.2" id="qIt-1E-zdR"/>
                             <constraint firstItem="2YT-8A-gvX" firstAttribute="width" secondItem="dpJ-wm-E3K" secondAttribute="width" multiplier="1.2" id="u6N-k6-4pm"/>
                             <constraint firstItem="dpJ-wm-E3K" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="vaD-a1-sKe"/>
                             <constraint firstItem="tLJ-IM-aLU" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="xYZ-BL-bZj"/>
