@@ -7,8 +7,8 @@
 
 import UIKit
 
-protocol SaveHandlerProtocol : AnyObject {
+protocol SaveHandlerProtocol: AnyObject {
     func writeData(newData: UserProfile,
-                   completion: @escaping (_ isSuccessfullyCompleted : Bool, _ isGCDUsed : Bool) -> Void)
+                   completion: @escaping (_ isSuccessfullyCompleted: Bool, _ isGCDUsed: Bool) -> Void)
     func readData(_ action: @escaping (_ loadedProfile: UserProfile) -> Void)
 }

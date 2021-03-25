@@ -1,0 +1,9 @@
+platform :ios, '12.1'
+
+target 'TinkoffChat' do
+  use_frameworks!
+
+  pod 'Firebase/Firestore', '7.8'
+  pod 'SwiftLint'
+
+end

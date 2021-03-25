@@ -7,8 +7,8 @@
 
 import UIKit
 
-struct UserProfile{
-    let fullName:String?
-    let description:String?
-    let profileImage:UIImage?
+struct UserProfile {
+    let fullName: String?
+    let description: String?
+    let profileImage: UIImage?
 }

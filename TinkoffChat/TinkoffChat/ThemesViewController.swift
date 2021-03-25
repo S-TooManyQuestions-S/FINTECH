@@ -20,8 +20,8 @@ class ThemesViewController: UIViewController {
      rootView -> themesView -> (captured) rootView.field
      */
     
-    var themeHandlerClosure:(()->Void)?
-    var themePickerDelegate:ThemesPickerDelegate?
+    var themeHandlerClosure:(() -> Void)?
+    var themePickerDelegate: ThemesPickerDelegate?
     
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var classicLabel: UILabel!
@@ -42,7 +42,7 @@ class ThemesViewController: UIViewController {
     @IBAction func classicThemeButtonPressed(_ sender: Any) {
         resetBorders(currentThemeView: classicThemeView)
         ThemesManager.applyTheme(theme: .classic)
-        //themePickerDelegate?.useCurrentTheme() - uncomment for delegate use
+        // themePickerDelegate?.useCurrentTheme() - uncomment for delegate use
         themeHandlerClosure?()
         applyToCurrentView()
     }
@@ -50,14 +50,14 @@ class ThemesViewController: UIViewController {
     @IBAction func dayThemeButtonPressed(_ sender: Any) {
         resetBorders(currentThemeView: dayThemeView)
         ThemesManager.applyTheme(theme: .day)
-        //themePickerDelegate?.useCurrentTheme() - uncomment for delegate use
+        // themePickerDelegate?.useCurrentTheme() - uncomment for delegate use
         themeHandlerClosure?()
         applyToCurrentView()
     }
     @IBAction func nightThemeButtonPressed(_ sender: Any) {
         resetBorders(currentThemeView: nightThemeView)
         ThemesManager.applyTheme(theme: .night)
-        //hemePickerDelegate?.useCurrentTheme() - uncomment for delegate use
+        // hemePickerDelegate?.useCurrentTheme() - uncomment for delegate use
         themeHandlerClosure?()
         applyToCurrentView()
     }
@@ -71,7 +71,7 @@ class ThemesViewController: UIViewController {
         applyToCurrentView()
     }
     
-    func applyToCurrentView(){
+    func applyToCurrentView() {
         let currentTheme = ThemesManager.getTheme()
         view.backgroundColor = currentTheme.getBackGroundColor
         dayLabel.textColor = currentTheme.getTextColor
@@ -81,10 +81,9 @@ class ThemesViewController: UIViewController {
     }
 }
 
-
-extension ThemesViewController{
+extension ThemesViewController {
     
-    func prepareViews(){
+    func prepareViews() {
         prepareView(parentView: classicThemeView, firstChild: classicThemeInput, secondChild: classicThemeOutput, theme: .classic)
         prepareView(parentView: dayThemeView, firstChild: dayThemeInput, secondChild: dayThemeOutput, theme: .day)
         prepareView(parentView: nightThemeView, firstChild: nightThemeInput, secondChild: nightThemeOutput, theme: .night)
@@ -92,21 +91,21 @@ extension ThemesViewController{
         
     }
     
-    func prepareView(parentView: UIView, firstChild:UIView, secondChild:UIView, theme:Theme){
+    func prepareView(parentView: UIView, firstChild: UIView, secondChild: UIView, theme: Theme) {
         parentView.backgroundColor = theme.getBackGroundColor
         firstChild.backgroundColor = theme.getInputMessageColor
         secondChild.backgroundColor = theme.getOutPutMessageColor
         
-        parentView.layer.cornerRadius = parentView.frame.height * 14/40
-        firstChild.layer.cornerRadius = firstChild.frame.height * 14/40
-        secondChild.layer.cornerRadius = secondChild.frame.height * 14/40
+        parentView.layer.cornerRadius = parentView.frame.height * 14 / 40
+        firstChild.layer.cornerRadius = firstChild.frame.height * 14 / 40
+        secondChild.layer.cornerRadius = secondChild.frame.height * 14 / 40
         
         parentView.layer.borderWidth = 1
         parentView.layer.borderColor = UIColor.systemGray.cgColor
     }
     
-    func outlineCurrentTheme(){
-        switch ThemesManager.getTheme(){
+    func outlineCurrentTheme() {
+        switch ThemesManager.getTheme() {
         case .classic:
             classicThemeView.layer.borderColor = UIColor.systemBlue.cgColor
             classicThemeView.layer.borderWidth = 3
@@ -119,8 +118,8 @@ extension ThemesViewController{
         }
     }
     
-    func resetBorders(currentThemeView:UIView){
-        for view in [classicThemeView, dayThemeView, nightThemeView]{
+    func resetBorders(currentThemeView: UIView) {
+        for view in [classicThemeView, dayThemeView, nightThemeView] {
             view?.layer.borderColor = UIColor.systemGray.cgColor
             view?.layer.borderWidth = 1
         }
