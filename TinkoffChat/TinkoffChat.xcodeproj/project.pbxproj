@@ -15,8 +15,8 @@
 		6A113F6425EFEABD00FB643C /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A113F6225EFEABD00FB643C /* MessageCell.xib */; };
 		6A113F6725EFEAD200FB643C /* MessageCellConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A113F6625EFEAD200FB643C /* MessageCellConfiguration.swift */; };
 		6A113F6A25EFEAE000FB643C /* MessageCellDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A113F6925EFEAE000FB643C /* MessageCellDataModel.swift */; };
-		6A34BE0D260A653E00E11010 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A34BE0C260A653E00E11010 /* GoogleService-Info.plist */; };
 		6A34BE1B260BB44600E11010 /* UserIdHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A34BE1A260BB44500E11010 /* UserIdHandler.swift */; };
+		6A34BE27260D327500E11010 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A34BE26260D327500E11010 /* GoogleService-Info.plist */; };
 		6A40B7AF25E70A3E0057354F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A40B7AE25E70A3E0057354F /* ViewController.swift */; };
 		6A40B7B625E70E6F0057354F /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A40B7B525E70E6F0057354F /* Logger.swift */; };
 		6A41867325EE8B80001A9538 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A41867225EE8B7F001A9538 /* ConversationsListViewController.swift */; };
@@ -50,8 +50,8 @@
 		6A113F6225EFEABD00FB643C /* MessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
 		6A113F6625EFEAD200FB643C /* MessageCellConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellConfiguration.swift; sourceTree = "<group>"; };
 		6A113F6925EFEAE000FB643C /* MessageCellDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellDataModel.swift; sourceTree = "<group>"; };
-		6A34BE0C260A653E00E11010 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6A34BE1A260BB44500E11010 /* UserIdHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserIdHandler.swift; sourceTree = "<group>"; };
+		6A34BE26260D327500E11010 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6A40B7AE25E70A3E0057354F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6A40B7B525E70E6F0057354F /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		6A41867225EE8B7F001A9538 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
@@ -157,7 +157,7 @@
 		6A41868225EEABE9001A9538 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				6A34BE0C260A653E00E11010 /* GoogleService-Info.plist */,
+				6A34BE26260D327500E11010 /* GoogleService-Info.plist */,
 				6A4B9CDB25DC2957000E5E29 /* Info.plist */,
 				6A4B9CD625DC2957000E5E29 /* Assets.xcassets */,
 				6A4B9CCD25DC2950000E5E29 /* AppDelegate.swift */,
@@ -329,7 +329,7 @@
 				6A4B9CD725DC2957000E5E29 /* Assets.xcassets in Resources */,
 				6A4B9CD525DC2950000E5E29 /* Main.storyboard in Resources */,
 				6A41867825EE8E4B001A9538 /* ConversationCell.xib in Resources */,
-				6A34BE0D260A653E00E11010 /* GoogleService-Info.plist in Resources */,
+				6A34BE27260D327500E11010 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
