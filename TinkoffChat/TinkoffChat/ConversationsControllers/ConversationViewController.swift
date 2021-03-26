@@ -53,8 +53,11 @@ class ConversationViewController: ViewController {
         navigationItem.backBarButtonItem?.title = "Tinkoff Chat"
         
         dialogTable.register(UINib(nibName: String(describing: MessageCell.self), bundle: nil), forCellReuseIdentifier: cellIdentifier)
-        view.backgroundColor = ThemesManager.currentTheme().getBackGroundColor
-        dialogTable.backgroundColor = ThemesManager.currentTheme().getBackGroundColor
+        
+        let theme = ThemesManager.getTheme()
+        
+        view.backgroundColor = theme.getBackGroundColor
+        dialogTable.backgroundColor = theme.getBackGroundColor
     }
 
     func prepareView(with inputCell: ConversationCellDataModel){

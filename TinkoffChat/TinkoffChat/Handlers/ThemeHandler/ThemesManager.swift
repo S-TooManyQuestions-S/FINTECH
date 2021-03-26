@@ -12,7 +12,6 @@ struct ThemesManager{
     static let saveHandler = GCDSaveHandler()
     static var currentTheme: Theme?
     
-
     private static func loadTheme() {
 //        if let storedTheme = UserDefaults.standard.value(forKey: selectedThemeKey) as? Int{
 //            return Theme(rawValue: storedTheme) ?? .classic

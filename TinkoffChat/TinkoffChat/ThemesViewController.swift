@@ -72,7 +72,7 @@ class ThemesViewController: UIViewController {
     }
     
     func applyToCurrentView(){
-        let currentTheme = ThemesManager.currentTheme()
+        let currentTheme = ThemesManager.getTheme()
         view.backgroundColor = currentTheme.getBackGroundColor
         dayLabel.textColor = currentTheme.getTextColor
         classicLabel.textColor = currentTheme.getTextColor
@@ -106,7 +106,7 @@ extension ThemesViewController{
     }
     
     func outlineCurrentTheme(){
-        switch ThemesManager.currentTheme(){
+        switch ThemesManager.getTheme(){
         case .classic:
             classicThemeView.layer.borderColor = UIColor.systemBlue.cgColor
             classicThemeView.layer.borderWidth = 3

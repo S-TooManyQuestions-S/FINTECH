@@ -100,7 +100,7 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.textColor = ThemesManager.currentTheme().getTextColor
+        header.textLabel?.textColor = ThemesManager.getTheme().getTextColor
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -113,14 +113,16 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
     }
     
     func applyColors(){
-        let currentTheme = ThemesManager.currentTheme()
-        view.backgroundColor = currentTheme.getBackGroundColor
-        messageTable.backgroundColor = currentTheme.getBackGroundColor
         
-        navigationController?.navigationBar.backgroundColor = currentTheme.getBackGroundColor
-        navigationController?.navigationBar.barTintColor = currentTheme.getNavigationBarColor
-        navigationController?.navigationBar.tintColor = currentTheme.getTextColor
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: currentTheme.getTextColor]
+        let theme = ThemesManager.getTheme()
+        
+        view.backgroundColor = theme.getBackGroundColor
+        messageTable.backgroundColor = theme.getBackGroundColor
+        
+        navigationController?.navigationBar.backgroundColor = theme.getBackGroundColor
+        navigationController?.navigationBar.barTintColor = theme.getNavigationBarColor
+        navigationController?.navigationBar.tintColor = theme.getTextColor
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: theme.getTextColor]
     }
     
 }
