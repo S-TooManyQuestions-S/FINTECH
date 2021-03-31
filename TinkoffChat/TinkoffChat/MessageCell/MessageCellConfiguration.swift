@@ -7,6 +7,9 @@
 
 import UIKit
 
-protocol MessageCellConfiguration{
-    var text: String? {get set}
+protocol MessageCellConfiguration: class {
+    var content: String {get}
+    var created: Date {get}
+    var senderId: String {get}
+    var senderName: String {get}
 }

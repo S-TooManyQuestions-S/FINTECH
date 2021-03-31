@@ -7,18 +7,16 @@
 
 import UIKit
 
-class MessageCellDataModel : MessageCellConfiguration{
-    var text: String?
+class MessageCellDataModel: MessageCellConfiguration {
+    var content: String
+    var created: Date
+    var senderId: String
+    var senderName: String
     
-    var typeOf: MessageType
-    
-    enum MessageType{
-        case received
-        case sent
-    }
-    
-    init(message:String?, typeOf:MessageType){
-        self.text = message
-        self.typeOf = typeOf
+    init(content: String, created: Date, senderId: String, senderName: String) {
+        self.content = content
+        self.created = created
+        self.senderId = senderId
+        self.senderName = senderName
     }
 }

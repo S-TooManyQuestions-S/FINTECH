@@ -7,18 +7,16 @@
 
 import UIKit
 
-class ConversationCellDataModel : ConversationCellConfiguration{    
-    var name: String?
-    var message: String?
-    var date: Date?
-    var online: Bool
-    var hasUnreadMessages: Bool
-
-    init(name: String?, message: String?, date: Date?, online: Bool, hasUnreadMessages:Bool){
+class ConversationCellDataModel: ConversationCellConfiguration {
+    var identifier: String
+    var name: String
+    var lastMessage: String?
+    var lastActivity: Date?
+    
+    init(id: String, name: String, lastMessage: String?, lastActivity: Date?) {
+        self.identifier = id
         self.name = name
-        self.hasUnreadMessages = hasUnreadMessages
-        self.message = message
-        self.date = date
-        self.online = online
+        self.lastMessage = lastMessage
+        self.lastActivity = lastActivity
     }
 }

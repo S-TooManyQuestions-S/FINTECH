@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct ThemesManager{
+struct ThemesManager {
     static let selectedThemeKey = "selectedThemeKey"
     static let saveHandler = GCDSaveHandler()
     static var currentTheme: Theme?
@@ -28,8 +28,8 @@ struct ThemesManager{
         saveHandler.writeTheme(to: selectedThemeKey + ".txt", rawTheme: theme.rawValue)
     }
     
-    static func getTheme() -> Theme{
-        if let theme = currentTheme{
+    static func getTheme() -> Theme {
+        if let theme = currentTheme {
             return theme
         }
         

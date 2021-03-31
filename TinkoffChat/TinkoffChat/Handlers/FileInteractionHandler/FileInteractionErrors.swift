@@ -7,8 +7,8 @@
 
 import UIKit
 
-enum FileInteractionErrors : Error{
-    case directoryNilError(message:String)
-    case fileMissing(message:String)
-    case textLoadingError(message:String)
+enum FileInteractionErrors: Error {
+    case directoryNilError(message: String)
+    case fileMissing(message: String)
+    case textLoadingError(message: String)
 }
