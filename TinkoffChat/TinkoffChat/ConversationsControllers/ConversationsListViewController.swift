@@ -16,6 +16,7 @@ class ConversationsListViewController: UIViewController, ThemesPickerDelegate {
             alertController.addTextField { (textField: UITextField!) -> Void in
                 textField.placeholder = "Enter Channel Name"
             }
+        
             let saveAction = UIAlertAction(title: "Save", style: .default, handler: { _ -> Void in
                 if let textField = alertController.textFields?[0],
                    let textOfField = textField.text,
@@ -51,6 +52,8 @@ class ConversationsListViewController: UIViewController, ThemesPickerDelegate {
     private let cellIdentifier = String(describing: ConversationCell.self)
     private var listOfChannels: [ConversationCellDataModel] = []
     
+    private var fireBaseConnectionHandler = FireBaseHandler.shared
+    
     @IBAction func settingsButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: "Settings", sender: nil)
     }
@@ -71,23 +74,14 @@ class ConversationsListViewController: UIViewController, ThemesPickerDelegate {
         
         reference.addSnapshotListener {[weak self] snapshot, _ in
             if let documents = snapshot?.documents {
-                self?.listOfChannels = []
-                for document in documents {
-                    let data = document.data()
-                    let name = data["name"] as? String ?? ""
-                    let lastMessage = data["lastMessage"] as? String ?? ""
-                    var lastActivity: Date?
-                    if let receivedDate = data["lastActivity"] as? Timestamp {
-                        lastActivity = receivedDate.dateValue()
-                    }
-                    self?.listOfChannels.append(ConversationCellDataModel(id: document.documentID, name: name, lastMessage: lastMessage, lastActivity: lastActivity))
-                }
+                guard let receivedChannels = self?.fireBaseConnectionHandler.receiveChannels(
+                        from: documents) else {return}
+                self?.listOfChannels = receivedChannels
             }
-            self?.listOfChannels.sort(by: ({$0.lastActivity ?? Date() > $1.lastActivity ?? Date()}))
             self?.messageTable.reloadData()
         }
-        
         title = "Tinkoff Chat"
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 
 class ConversationViewController: ViewController {
+    
     @IBOutlet weak var dialogTable: UITableView!
     @IBOutlet weak var textToSend: UITextField!
     @IBOutlet weak var sendMessageButton: UIButton!
@@ -16,16 +17,13 @@ class ConversationViewController: ViewController {
     @IBOutlet weak var sendMessageView: UIView!
     
     @IBAction func sendMessageButtonPressed(_ sender: Any) {
+        
         if let text = self.textToSend.text {
             DispatchQueue.global().async {
-                let userName = try? FileInteractionHandler().loadText(from: FileInteractionHandler.fullNameDataPath)
-                    self.reference?.addDocument(data: [
-                        "content": text,
-                        "created": Timestamp(date: Date()),
-                        "senderId": UserIdHandler.getID(),
-                        "senderName": userName ?? "Unknown User"
-                    ])
+                self.fireBaseHandler.sendMessage(with: text,
+                                                  through: self.reference)
             }
+            
             textToSend.text = ""
             sendMessageButton.isEnabled = false
         }
@@ -33,10 +31,13 @@ class ConversationViewController: ViewController {
     
     private lazy var dataBase = Firestore.firestore()
     private lazy var reference: CollectionReference? = nil
+    
     private var messageList: [MessageCellDataModel] = []
+    private var fireBaseHandler = FireBaseHandler.shared
+    private var currentChat: ConversationCellDataModel?
     
     private let cellIdentifier = String(describing: MessageCell.self)
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         dialogTable.delegate = self
@@ -46,11 +47,15 @@ class ConversationViewController: ViewController {
         
         dialogTable.register(UINib(nibName: String(describing: MessageCell.self), bundle: nil), forCellReuseIdentifier: cellIdentifier)
         
-        let theme = ThemesManager.getTheme()
-        
         reference?.addSnapshotListener {[weak self] snapshot, _ in
             if let snapshot = snapshot {
-                self?.receiveMessages(documents: snapshot.documents)
+                guard let currentChat = self?.currentChat,
+                      let messageList = self?.fireBaseHandler.receiveMessages(chat: currentChat,
+                                                                              documents: snapshot.documents) else {
+                    return
+                }
+                self?.messageList = messageList
+                
                 self?.dialogTable.reloadData()
                 
                 if let messageList = self?.messageList, messageList.count > 0 {
@@ -66,18 +71,23 @@ class ConversationViewController: ViewController {
             }
         }
         
-        view.backgroundColor = theme.getBackGroundColor
-        dialogTable.backgroundColor = theme.getBackGroundColor
-        
         sendMessageButton.isEnabled = false
         textToSend.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
+        
+        setTheme()
+    }
+    
+    func setTheme() {
+        let theme = ThemesManager.getTheme()
+        
+        view.backgroundColor = theme.getBackGroundColor
+        dialogTable.backgroundColor = theme.getBackGroundColor
         
         sendMessageView.backgroundColor = theme.getNavigationBarColor
         textToSend.backgroundColor = theme.getBackGroundColor
         
         noMessagesLabel.textColor = theme.getTextColor
         textToSend.textColor = theme.getTextColor
-       
     }
     
     @objc func editingChanged(_ textField: UITextField) {
@@ -91,6 +101,7 @@ class ConversationViewController: ViewController {
 
     func prepareView(with inputCell: ConversationCellDataModel) {
         title = inputCell.name
+        currentChat = inputCell
         reference = dataBase.collection("channels/\(inputCell.identifier)/messages")
     }
 }
@@ -109,23 +120,5 @@ extension ConversationViewController: UITableViewDelegate, UITableViewDataSource
         }
         cell.configure(with: messageData)
         return cell
-    }
-}
-
-extension ConversationViewController {
-    func receiveMessages(documents: [QueryDocumentSnapshot]) {
-        messageList = []
-        for document in documents {
-            if  let content = document["content"] as? String,
-                let created = document["created"] as? Timestamp,
-                let senderId = document["senderId"] as? String,
-                let senderName = document["senderName"] as? String {
-                messageList.append(MessageCellDataModel(content: content,
-                                                        created: created.dateValue(),
-                                                        senderId: senderId,
-                                                        senderName: senderName))
-            }
-        }
-        messageList.sort(by: ({$0.created < $1.created}))
     }
 }

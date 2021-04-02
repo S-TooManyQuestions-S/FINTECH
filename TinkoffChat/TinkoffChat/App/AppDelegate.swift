@@ -15,8 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // Вызывается при успешном запуске приложения
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
         Logger.logProcess(fullDescription: "Application moved from <Not running> to <Inactive>: \(#function)")
+        
         FirebaseApp.configure()
+        
+        FireBaseHandler.shared.showDetailedDataChannels()
         // Override point for customization after application launch.
         return true
     }

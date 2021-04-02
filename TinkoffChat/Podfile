@@ -5,5 +5,5 @@ target 'TinkoffChat' do
 
   pod 'Firebase/Firestore', '7.8'
   pod 'SwiftLint'
-
+  
 end
