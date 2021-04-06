@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ViewController : UIViewController{
+class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
             Logger.logProcess(fullDescription: "UIViewController moved from <Disappeared> to <Appearing>: \(#function)")
@@ -16,31 +16,31 @@ class ViewController : UIViewController{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-            Logger.logProcess(fullDescription: "UIViewController moved from <Appearing> to <Appeared>: \(#function)")
+             Logger.logProcess(fullDescription: "UIViewController moved from <Appearing> to <Appeared>: \(#function)")
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-            Logger.logProcess(fullDescription: "UIViewController: \(#function)")
+             Logger.logProcess(fullDescription: "UIViewController: \(#function)")
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        Logger.logProcess(fullDescription: "UIViewController: \(#function)")
+            Logger.logProcess(fullDescription: "UIViewController: \(#function)")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        Logger.logProcess(fullDescription: "UIViewController moved from <Appeared> to <Disappearing>: \(#function)")
+            Logger.logProcess(fullDescription: "UIViewController moved from <Appeared> to <Disappearing>: \(#function)")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        Logger.logProcess(fullDescription: "UIViewController moved from <Disappearing> to <Disappeared>: \(#function)")
+            Logger.logProcess(fullDescription: "UIViewController moved from <Disappearing> to <Disappeared>: \(#function)")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Logger.logProcess(fullDescription: "UIViewController moved from <Loading View> to <Loaded View>: \(#function)")
+            Logger.logProcess(fullDescription: "UIViewController moved from <Loading View> to <Loaded View>: \(#function)")
     }
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OperationSaveHandler : FileInteractionHandler, SaveHandlerProtocol{
+class OperationSaveHandler: FileInteractionHandler, SaveHandlerProtocol {
     func writeData(newData: UserProfile, completion: @escaping (_ isSuccessfullyCompleted: Bool, _ isGCDUsed: Bool) -> Void) {
         self.errorOccuried = false
         
@@ -41,7 +41,7 @@ class OperationSaveHandler : FileInteractionHandler, SaveHandlerProtocol{
         let loadImageOperation = LoadImageDataOperation(handler: self)
         
         let completionOperation = BlockOperation(block: {
-            action(UserProfile(fullName: loadUserNameOperation.loadedText, description:  loadDescriptionOperation.loadedText, profileImage: loadImageOperation.image))
+            action(UserProfile(fullName: loadUserNameOperation.loadedText, description: loadDescriptionOperation.loadedText, profileImage: loadImageOperation.image))
         })
         
         completionOperation.addDependency(loadImageOperation)
@@ -52,67 +52,66 @@ class OperationSaveHandler : FileInteractionHandler, SaveHandlerProtocol{
     }
 }
 
-class SaveTextDataOperation : Operation {
-    var textDataToSave : String?
-    var saveToPath : String
-    weak var handler : FileInteractionHandler?
+class SaveTextDataOperation: Operation {
+    var textDataToSave: String?
+    var saveToPath: String
+    weak var handler: FileInteractionHandler?
     
-    init(textData : String?, pathToSave : String, handler: FileInteractionHandler){
+    init(textData: String?, pathToSave: String, handler: FileInteractionHandler) {
         self.textDataToSave = textData
         self.saveToPath = pathToSave
         self.handler = handler
     }
     
-    override func main(){
+    override func main() {
         guard !isCancelled else {
             return
         }
        
-        do{
-            if let textDataToSave = textDataToSave{
+        do {
+            if let textDataToSave = textDataToSave {
                 try handler?.saveText(text: textDataToSave, to: saveToPath)
             }
-        }catch{
+        } catch {
             handler?.errorOccuried = true
         }
     }
 }
 
-class SaveImageDataOperation : Operation{
-    var image : UIImage?
-    weak var handler : FileInteractionHandler?
+class SaveImageDataOperation: Operation {
+    var image: UIImage?
+    weak var handler: FileInteractionHandler?
     
-    init(image: UIImage?, handler: FileInteractionHandler){
+    init(image: UIImage?, handler: FileInteractionHandler) {
         self.handler = handler
         self.image = image
     }
     
-    override func main(){
+    override func main() {
         guard !isCancelled else {
             return
         }
-        do{
-            if let imageDataToSave = image?.pngData(){
+        do {
+            if let imageDataToSave = image?.pngData() {
                 try handler?.saveImage(data: imageDataToSave)
             }
-        }catch{
+        } catch {
             handler?.errorOccuried = true
         }
     }
 }
 
-
-class LoadTextDataOperation : Operation{
-    var loadedText : String?
-    var pathForLoading : String
-    weak var handler : FileInteractionHandler?
+class LoadTextDataOperation: Operation {
+    var loadedText: String?
+    var pathForLoading: String
+    weak var handler: FileInteractionHandler?
     
-    init(handler: FileInteractionHandler, pathForLoading: String){
+    init(handler: FileInteractionHandler, pathForLoading: String) {
         self.handler = handler
         self.pathForLoading = pathForLoading
     }
     
-    override func main(){
+    override func main() {
         guard !isCancelled else {
             return
         }
@@ -121,15 +120,15 @@ class LoadTextDataOperation : Operation{
     }
 }
 
-class LoadImageDataOperation : Operation{
-    var image : UIImage?
-    weak var handler : FileInteractionHandler?
+class LoadImageDataOperation: Operation {
+    var image: UIImage?
+    weak var handler: FileInteractionHandler?
     
-    init(handler: FileInteractionHandler){
+    init(handler: FileInteractionHandler) {
         self.handler = handler
     }
     
-    override func main(){
+    override func main() {
         guard !isCancelled else {
             return
         }

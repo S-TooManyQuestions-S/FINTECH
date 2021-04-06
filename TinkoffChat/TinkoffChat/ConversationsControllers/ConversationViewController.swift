@@ -6,44 +6,37 @@
 //
 
 import UIKit
+import Firebase
 
 class ConversationViewController: ViewController {
+    
     @IBOutlet weak var dialogTable: UITableView!
+    @IBOutlet weak var textToSend: UITextField!
+    @IBOutlet weak var sendMessageButton: UIButton!
+    @IBOutlet weak var noMessagesLabel: UILabel!
+    @IBOutlet weak var sendMessageView: UIView!
+    
+    @IBAction func sendMessageButtonPressed(_ sender: Any) {
+        
+        if let text = self.textToSend.text {
+            DispatchQueue.global().async {
+                self.fireBaseHandler.sendMessage(with: text,
+                                                  through: self.reference)
+            }
+            
+            textToSend.text = ""
+            sendMessageButton.isEnabled = false
+        }
+    }
+    
+    private lazy var dataBase = Firestore.firestore()
+    private lazy var reference: CollectionReference? = nil
+    
+    private var messageList: [MessageCellDataModel] = []
+    private var fireBaseHandler = FireBaseHandler.shared
+    private var currentChat: ConversationCellDataModel?
     
     private let cellIdentifier = String(describing: MessageCell.self)
-    
-    private static let testMessages = [
-        MessageCellDataModel(message: nil, typeOf: .received),
-        MessageCellDataModel(message: "Dm me as soon as possible, I have some business to discuss :0", typeOf: .received),
-        MessageCellDataModel(message: "Hi, bro, everything's fine, holding up, what's up?", typeOf: .sent),
-        MessageCellDataModel(message: "Bro, where have you been, the work is almost done, I need you here rn!", typeOf: .received),
-        MessageCellDataModel(message: "Ok, coming!", typeOf: .sent),
-        MessageCellDataModel(message: "terminating app due to uncaught exception 'nsinternalinconsistencyexception', reason: 'invalid nib registered for identifier (messagecell) - nib must contain exactly one top level object which must be a uitableviewcell instanceterminating app due to uncaught exception 'nsinternalinconsistencyexception', reason: 'invalid nib registered for identifier (messagecell) - nib must contain exactly one top level object which must be a uitableviewcell instanceterminating app due to uncaught exception 'nsinternalinconsistencyexception', reason: 'invalid nib registered for identifier (messagecell) - nib must contain exactly one top level object which must be a uitableviewcell instance", typeOf: .sent),
-        MessageCellDataModel(message: "Dm me as soon as possible, I have some business to discuss :0", typeOf: .received),
-        MessageCellDataModel(message: "Hi, bro, everything's fine, holding up, what's up?", typeOf: .sent),
-        MessageCellDataModel(message: "Bro, where have you been, the work is almost done, I need you here rn!",typeOf: .received),
-        MessageCellDataModel(message: "Ok, coming!", typeOf: .sent),
-        MessageCellDataModel(message: "Dm me as soon as possible, I have some business to discuss :0", typeOf: .received),
-        MessageCellDataModel(message: "terminating app due to uncaught exception 'nsinternalinconsistencyexception', reason: 'invalid nib registered for identifier (messagecell) - nib must contain exactly one top level object which must be a uitableviewcell instanceterminating app due to uncaught exception 'nsinternalinconsistencyexception', reason: 'invalid nib registered for identifier (messagecell) - nib must contain exactly one top level object which must be a uitableviewcell instanceterminating app due to uncaught exception 'nsinternalinconsistencyexception', reason: 'invalid nib registered for identifier (messagecell) - nib must contain exactly one top level object which must be a uitableviewcell instance", typeOf: .sent),
-        MessageCellDataModel(message: "Bro, where have you been, the work is almost done, I need you here rn!", typeOf: .received),
-        MessageCellDataModel(message: "Ok, coming!", typeOf: .sent),
-        MessageCellDataModel(message: "Dm me as soon as possible, I have some business to discuss :0", typeOf: .received),
-        MessageCellDataModel(message: "Hi, bro, everything's fine, holding up, what's up?", typeOf: .sent),
-        MessageCellDataModel(message: "Bro, where have you been, the work is almost done, I need you here rn!", typeOf: .received),
-        MessageCellDataModel(message: "Ok, coming!", typeOf: .sent),
-        MessageCellDataModel(message: "Dm me as soon as possible, I have some business to discuss :0", typeOf: .received),
-        MessageCellDataModel(message: "Hi, bro, everything's fine, holding up, what's up?", typeOf: .sent),
-        MessageCellDataModel(message: "Bro, where have you been, the work is almost done, I need you here rn!", typeOf: .received),
-        MessageCellDataModel(message: "terminating app due to uncaught exception 'nsinternalinconsistencyexception', reason: 'invalid nib registered for identifier (messagecell) - nib must contain exactly one top level object which must be a uitableviewcell instanceterminating app due to uncaught exception 'nsinternalinconsistencyexception', reason: 'invalid nib registered for identifier (messagecell) - nib must contain exactly one top level object which must be a uitableviewcell instanceterminating app due to uncaught exception 'nsinternalinconsistencyexception', reason: 'invalid nib registered for identifier (messagecell) - nib must contain exactly one top level object which must be a uitableviewcell instance", typeOf: .sent),
-        MessageCellDataModel(message: "Dm me as soon as possible, I have some business to discuss :0", typeOf: .received),
-        MessageCellDataModel(message: "Hi, bro, everything's fine, holding up, what's up?", typeOf: .sent),
-        MessageCellDataModel(message: "Bro, where have you been, the work is almost done, I need you here rn!", typeOf: .received),
-        MessageCellDataModel(message: "Ok, coming!", typeOf: .sent),
-        MessageCellDataModel(message: "Dm me as soon as possible, I have some business to discuss :0", typeOf: .received),
-        MessageCellDataModel(message: "Hi, bro, everything's fine, holding up, what's up?", typeOf: .sent),
-        MessageCellDataModel(message: "Bro, where have you been, the work is almost done, I need you here rn!", typeOf: .received),
-        MessageCellDataModel(message: "Ok, coming!", typeOf: .sent)
-    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,28 +47,75 @@ class ConversationViewController: ViewController {
         
         dialogTable.register(UINib(nibName: String(describing: MessageCell.self), bundle: nil), forCellReuseIdentifier: cellIdentifier)
         
+        reference?.addSnapshotListener {[weak self] snapshot, _ in
+            if let snapshot = snapshot {
+                guard let currentChat = self?.currentChat,
+                      let messageList = self?.fireBaseHandler.receiveMessages(chat: currentChat,
+                                                                              documents: snapshot.documents) else {
+                    return
+                }
+                self?.messageList = messageList
+                
+                self?.dialogTable.reloadData()
+                
+                if let messageList = self?.messageList, messageList.count > 0 {
+                    let index = IndexPath(row: messageList.count - 1, section: 0)
+                    self?.dialogTable.scrollToRow(at: index, at: .bottom, animated: true)
+                }
+                
+                if self?.messageList.count == 0 {
+                    self?.noMessagesLabel.isHidden = false
+                } else {
+                    self?.noMessagesLabel.isHidden = true
+                }
+            }
+        }
+        
+        sendMessageButton.isEnabled = false
+        textToSend.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
+        
+        setTheme()
+    }
+    
+    func setTheme() {
         let theme = ThemesManager.getTheme()
         
         view.backgroundColor = theme.getBackGroundColor
         dialogTable.backgroundColor = theme.getBackGroundColor
+        
+        sendMessageView.backgroundColor = theme.getNavigationBarColor
+        textToSend.backgroundColor = theme.getBackGroundColor
+        
+        noMessagesLabel.textColor = theme.getTextColor
+        textToSend.textColor = theme.getTextColor
+    }
+    
+    @objc func editingChanged(_ textField: UITextField) {
+        guard let text = textField.text,
+              !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            sendMessageButton.isEnabled = false
+            return
+        }
+        sendMessageButton.isEnabled = true
     }
 
-    func prepareView(with inputCell: ConversationCellDataModel){
-        title = inputCell.name == nil ? "Unknown User" : inputCell.name
+    func prepareView(with inputCell: ConversationCellDataModel) {
+        title = inputCell.name
+        currentChat = inputCell
+        reference = dataBase.collection("channels/\(inputCell.identifier)/messages")
     }
 }
 
-
-extension ConversationViewController : UITableViewDelegate, UITableViewDataSource{
+extension ConversationViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ConversationViewController.testMessages.count
+        return messageList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let messageData = ConversationViewController.testMessages[indexPath.row]
+        let messageData = messageList[indexPath.row]
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? MessageCell
-        else{
+        else {
             return UITableViewCell()
         }
         cell.configure(with: messageData)

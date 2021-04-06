@@ -7,21 +7,21 @@
 
 import UIKit
 
-class GCDSaveHandler : FileInteractionHandler, SaveHandlerProtocol{
+class GCDSaveHandler: FileInteractionHandler, SaveHandlerProtocol {
     
-    func writeData(newData:UserProfile, completion: @escaping (_ isSuccessfullyCompleted : Bool, _ isGCDUsed: Bool) -> Void) {
+    func writeData(newData: UserProfile, completion: @escaping (_ isSuccessfullyCompleted: Bool, _ isGCDUsed: Bool) -> Void) {
         
         self.errorOccuried = false
         
-        DispatchQueue.global(qos:.utility).async {
+        DispatchQueue.global(qos: .utility).async {
             let dispatchGroup = DispatchGroup()
             
             dispatchGroup.enter()
             DispatchQueue.global(qos: .utility).async {
-                if let fullName = newData.fullName{
+                if let fullName = newData.fullName {
                     do {
                         try self.saveText(text: fullName, to: FileInteractionHandler.fullNameDataPath)
-                    }catch {
+                    } catch {
                         self.errorOccuried = true
                     }
                 }
@@ -30,10 +30,10 @@ class GCDSaveHandler : FileInteractionHandler, SaveHandlerProtocol{
             
             dispatchGroup.enter()
             DispatchQueue.global(qos: .utility).async {
-                if let description = newData.description{
-                    do{
+                if let description = newData.description {
+                    do {
                         try self.saveText(text: description, to: FileInteractionHandler.descriptionDataPath)
-                    }catch{
+                    } catch {
                         self.errorOccuried = true
                     }
                 }
@@ -42,10 +42,10 @@ class GCDSaveHandler : FileInteractionHandler, SaveHandlerProtocol{
             
             dispatchGroup.enter()
             DispatchQueue.global(qos: .utility).async {
-                if  let data = newData.profileImage?.pngData(){
-                    do{
+                if  let data = newData.profileImage?.pngData() {
+                    do {
                         try self.saveImage(data: data)
-                    }catch{
+                    } catch {
                         self.errorOccuried = true
                     }
                 }
@@ -58,15 +58,14 @@ class GCDSaveHandler : FileInteractionHandler, SaveHandlerProtocol{
         }
     }
     
-    
     func readData(_ action: @escaping (UserProfile) -> Void) {
         
         DispatchQueue.global(qos: .default).async {
             let dispatchGroup = DispatchGroup()
             
-            var fullName : String?
-            var description : String?
-            var image : UIImage?
+            var fullName: String?
+            var description: String?
+            var image: UIImage?
             
             dispatchGroup.enter()
             DispatchQueue.global(qos: .utility).async {
@@ -95,7 +94,7 @@ class GCDSaveHandler : FileInteractionHandler, SaveHandlerProtocol{
         
     }
     
-    func readTheme(from path: String) -> Theme{
+    func readTheme(from path: String) -> Theme {
         guard let fullPath = try? self.appendPath(path: path),
               let strValue = try? String(contentsOf: fullPath),
               let theme = Theme(rawValue: Int(strValue) ?? 0)
@@ -104,7 +103,7 @@ class GCDSaveHandler : FileInteractionHandler, SaveHandlerProtocol{
         return theme
     }
     
-    func writeTheme(to path: String, rawTheme: Int){
+    func writeTheme(to path: String, rawTheme: Int) {
         DispatchQueue.global(qos: .utility).async {
             try? self.saveText(text: String(rawTheme), to: path)
         }
