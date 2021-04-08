@@ -6,63 +6,121 @@
 //
 
 import UIKit
+import CoreData
 import Firebase
 
 class FireBaseHandler {
     
-    private static let coreDataStack = CoreDataStack()
+    private var coreDataHandler: CoreDataHandler?
     
     static var shared: FireBaseHandler = {
         let instance = FireBaseHandler()
-        coreDataStack.enableObservers()
+        instance.coreDataHandler = CoreDataHandler.shared
         return instance
     }()
     
-    func receiveChannels(from documents: [QueryDocumentSnapshot]) -> [ConversationCellDataModel] {
-        var receivedConversations = [ConversationCellDataModel]()
+    func receiveChannels(from changedDocuments: [DocumentChange], fetchedResultController: NSFetchedResultsController<Channel>) {
         
-        for document in documents {
-            let data = document.data()
-            guard  let name = data["name"] as? String else {
+        var channelsToSave = [ConversationCellDataModel]()
+        
+        for changedDocument in changedDocuments {
+            
+            guard let parsedChannel = parseReceivedDataChannel(document: changedDocument.document) else {
                 continue
             }
+            switch changedDocument.type {
+
+            case .added:
+                if let objects = fetchedResultController.fetchedObjects,
+                   objects.contains(where: {$0.identifier_db == changedDocument.document.documentID}) {
+                    coreDataHandler?.updateChannel(channel: parsedChannel)
+                } else {
+                    channelsToSave.append(parsedChannel)
+                }
+            case .modified:
+                coreDataHandler?.updateChannel(channel: parsedChannel)
+            case .removed:
+                coreDataHandler?.deleteChannel(channel: parsedChannel)
+            default:
+                break
+            }
+        }
+        coreDataHandler?.saveChannels(channels: channelsToSave)
+    }
+    
+    func parseReceivedDataChannel(document: QueryDocumentSnapshot) -> ConversationCellDataModel? {
+        let data = document.data()
+        if let name = data["name"] as? String {
             
-            let lastMessage = data["lastMessage"] as? String ?? ""
+            let lastMessage = data["lastMessage"] as? String
             
             var lastActivity: Date?
             if let receivedDate = data["lastActivity"] as? Timestamp {
                 lastActivity = receivedDate.dateValue()
             }
             
-            receivedConversations.append(.init(id: document.documentID,
-                                               name: name,
-                                               lastMessage: lastMessage,
-                                               lastActivity: lastActivity))
+            return .init(id: document.documentID,
+                         name: name,
+                         lastMessage: lastMessage,
+                         lastActivity: lastActivity)
+            
         }
-        
-        receivedConversations.sort(by: ({$0.lastActivity ?? Date() > $1.lastActivity ?? Date()}))
-        saveReceivedChannels(channels: receivedConversations)
-        return receivedConversations
+        return nil
     }
     
+    func parseReceivedDataMessage(document: QueryDocumentSnapshot) -> MessageCellDataModel? {
+        guard
+            let content = document["content"] as? String,
+            let created = document["created"] as? Timestamp,
+            let senderId = document["senderId"] as? String,
+            let senderName = document["senderName"] as? String
+        else {
+            return nil
+        }
+        return MessageCellDataModel(content: content,
+                                    created: created.dateValue(),
+                                    senderId: senderId,
+                                    senderName: senderName,
+                                    messageId: document.documentID)
+    }
+    
+    func receiveMessages(in chat: ConversationCellDataModel, from changedDocuments: [DocumentChange], fetchedResultController: NSFetchedResultsController<Message>) {
+        
+        var messagesToSave = [MessageCellDataModel]()
+        
+        for changedDocument in changedDocuments {
+            
+            guard let parsedMesssage = parseReceivedDataMessage(document: changedDocument.document) else {
+                continue
+            }
+            
+            switch changedDocument.type {
+            case .added:
+                messagesToSave.append(parsedMesssage)
+            default:
+                break
+            }
+        }
+        coreDataHandler?.saveReceivedMessages(chat: chat,
+                                              messages: messagesToSave)
+    }
+
     func receiveMessages(chat: ConversationCellDataModel,
-                         documents: [QueryDocumentSnapshot]) -> [MessageCellDataModel] {
+                         documents: [DocumentChange]) {
         var messageList = [MessageCellDataModel]()
         for document in documents {
-            if  let content = document["content"] as? String,
-                let created = document["created"] as? Timestamp,
-                let senderId = document["senderId"] as? String,
-                let senderName = document["senderName"] as? String {
+            if  let content = document.document["content"] as? String,
+                let created = document.document["created"] as? Timestamp,
+                let senderId = document.document["senderId"] as? String,
+                let senderName = document.document["senderName"] as? String {
                 messageList.append(MessageCellDataModel(content: content,
                                                         created: created.dateValue(),
                                                         senderId: senderId,
                                                         senderName: senderName,
-                                                        messageId: document.documentID))
+                                                        messageId: document.document.documentID))
             }
         }
-        messageList.sort(by: ({$0.created < $1.created}))
-        saveReceivedMessages(chat: chat, messages: messageList)
-        return messageList
+        coreDataHandler?.saveReceivedMessages(chat: chat, messages: messageList)
     }
     
     func sendMessage(with text: String, through reference: CollectionReference?) {
@@ -75,32 +133,14 @@ class FireBaseHandler {
             ])
     }
     
-    func showDetailedDataChannels() {
-        FireBaseHandler.coreDataStack.printDataBaseStatisticsForChannels()
-    }
-}
-
-// CoreDataStack interaction logic
-extension FireBaseHandler {
-    func saveReceivedChannels(channels: [ConversationCellDataModel]) {
-        DispatchQueue.global(qos: .utility).async {
-            FireBaseHandler.coreDataStack.performSave { context in
-                channels.forEach {
-                    _ = Channel(with: $0, in: context)
-                }
-            }
-        }
+    func deleteChannel(with channel: ConversationCellDataModel,
+                       through reference: CollectionReference) {
+        reference.document(channel.identifier).delete()
+        coreDataHandler?.deleteChannel(channel: channel)
+        
     }
     
-    func saveReceivedMessages(chat: ConversationCellDataModel, messages: [MessageCellDataModel]) {
-        DispatchQueue.global(qos: .utility).async {
-            FireBaseHandler.coreDataStack.performSave { context in
-                let chat = Channel(with: chat, in: context)
-                messages.forEach {
-                    let message = Message(with: $0, in: context)
-                    chat.addToMessages(message)
-                }
-            }
-        }
+    func showDetailedDataChannels() {
+        CoreDataStack.shared.printDataBaseStatisticsForChannels()
     }
 }
