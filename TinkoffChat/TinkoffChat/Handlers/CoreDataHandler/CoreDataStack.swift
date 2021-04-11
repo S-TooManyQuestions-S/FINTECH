@@ -10,6 +10,12 @@ import CoreData
 
 class CoreDataStack {
     
+    static var shared: CoreDataStack = {
+        let dataStack = CoreDataStack()
+        dataStack.enableObservers()
+        return dataStack
+    }()
+    
     var didUpadateDataBase: ((CoreDataStack) -> Void)?
     
     private var storeUrl: URL = {
@@ -112,7 +118,7 @@ class CoreDataStack {
         }
     }
     
-    private func performSave(in context: NSManagedObjectContext) {
+     func performSave(in context: NSManagedObjectContext) {
         context.performAndWait {
             do {
                 try context.save()
@@ -167,5 +173,13 @@ class CoreDataStack {
                 print(error.localizedDescription)
             }
         }
+    }
+}
+extension CoreDataStack {
+    func getFetchedResultController<T: NSFetchRequestResult>(with fetchRequest: NSFetchRequest<T>) -> NSFetchedResultsController<T> {
+        return NSFetchedResultsController(fetchRequest: fetchRequest,
+                                          managedObjectContext: mainContext,
+                                          sectionNameKeyPath: nil,
+                                          cacheName: nil)
     }
 }

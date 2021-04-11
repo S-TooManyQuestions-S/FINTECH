@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct ThemesManager{
+struct ThemesManager {
     static let selectedThemeKey = "selectedThemeKey"
     
     static func currentTheme() -> Theme {

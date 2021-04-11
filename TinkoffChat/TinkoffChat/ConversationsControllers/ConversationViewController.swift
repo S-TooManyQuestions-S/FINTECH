@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 import Firebase
 
 class ConversationViewController: ViewController {
@@ -16,23 +17,40 @@ class ConversationViewController: ViewController {
     @IBOutlet weak var noMessagesLabel: UILabel!
     @IBOutlet weak var sendMessageView: UIView!
     
+    lazy var fetchedResultController: NSFetchedResultsController<Message> = {
+        
+        let request: NSFetchRequest<Message> = Message.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "created_db", ascending: true)
+        
+        var predicate: NSPredicate?
+        if let id = currentChat?.identifier {
+            predicate = NSPredicate(format: "channel.identifier_db == %@", id)
+        }
+        
+        request.sortDescriptors = [sortDescriptor]
+        request.predicate = predicate
+
+        let fetchedResultsController = CoreDataStack.shared.getFetchedResultController(with: request)
+        fetchedResultsController.delegate = self
+
+        return fetchedResultsController
+    }()
+    
     @IBAction func sendMessageButtonPressed(_ sender: Any) {
         
         if let text = self.textToSend.text {
-            DispatchQueue.global().async {
-                self.fireBaseHandler.sendMessage(with: text,
-                                                  through: self.reference)
+            DispatchQueue.global(qos: .utility).async { [weak self] in
+                self?.fireBaseHandler.sendMessage(with: text,
+                                                  through: self?.reference)
             }
-            
-            textToSend.text = ""
-            sendMessageButton.isEnabled = false
         }
+        textToSend.text = ""
+        sendMessageButton.isEnabled = false
     }
     
     private lazy var dataBase = Firestore.firestore()
     private lazy var reference: CollectionReference? = nil
     
-    private var messageList: [MessageCellDataModel] = []
     private var fireBaseHandler = FireBaseHandler.shared
     private var currentChat: ConversationCellDataModel?
     
@@ -49,31 +67,32 @@ class ConversationViewController: ViewController {
         
         reference?.addSnapshotListener {[weak self] snapshot, _ in
             if let snapshot = snapshot {
-                guard let currentChat = self?.currentChat,
-                      let messageList = self?.fireBaseHandler.receiveMessages(chat: currentChat,
-                                                                              documents: snapshot.documents) else {
+                guard let currentChat = self?.currentChat else {
                     return
                 }
-                self?.messageList = messageList
-                
-                self?.dialogTable.reloadData()
-                
-                if let messageList = self?.messageList, messageList.count > 0 {
-                    let index = IndexPath(row: messageList.count - 1, section: 0)
-                    self?.dialogTable.scrollToRow(at: index, at: .bottom, animated: true)
-                }
-                
-                if self?.messageList.count == 0 {
-                    self?.noMessagesLabel.isHidden = false
-                } else {
-                    self?.noMessagesLabel.isHidden = true
-                }
+                self?.fireBaseHandler.receiveMessages(chat: currentChat,
+                                                      documents: snapshot.documentChanges)
+            }
+            self?.dialogTable.reloadData()
+            
+            if let count = self?.fetchedResultController.fetchedObjects?.count,
+               count > 0 {
+                let index = IndexPath(row: count - 1, section: 0)
+                self?.dialogTable.scrollToRow(at: index, at: .bottom, animated: true)
+            }
+            
+            if let count = self?.fetchedResultController.fetchedObjects?.count,
+               count == 0 {
+                self?.noMessagesLabel.isHidden = false
+            } else {
+                self?.noMessagesLabel.isHidden = true
             }
         }
         
         sendMessageButton.isEnabled = false
         textToSend.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
         
+        try? fetchedResultController.performFetch()
         setTheme()
     }
     
@@ -108,17 +127,81 @@ class ConversationViewController: ViewController {
 
 extension ConversationViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return messageList.count
+         guard let objs = fetchedResultController.fetchedObjects else {
+            return 0
+        }
+        return objs.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let messageData = messageList[indexPath.row]
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? MessageCell
+        guard
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? MessageCell,
+            let message = getItem(by: indexPath)
         else {
             return UITableViewCell()
         }
-        cell.configure(with: messageData)
+        
+        cell.configure(with: message)
         return cell
+    }
+    
+    func getItem(by index: IndexPath) -> MessageCellDataModel? {
+        let message = self.fetchedResultController.object(at: index)
+       
+        guard
+            let messageId = message.messageId_db,
+            let messageContent = message.content_db,
+            let created = message.created_db,
+            let senderId = message.senderId_db,
+            let senderName = message.senderName_db
+        else {
+            return nil
+        }
+        return .init(content: messageContent,
+                     created: created,
+                     senderId: senderId,
+                     senderName: senderName,
+                     messageId: messageId)
+    }
+}
+
+extension ConversationViewController: NSFetchedResultsControllerDelegate {
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?) {
+        switch type {
+        
+        case .insert:
+            if let newIndexPath = newIndexPath {
+                dialogTable.insertRows(at: [newIndexPath], with: .automatic)
+            }
+        case .move:
+            if let indexPath = indexPath,
+               let newIndexPath = newIndexPath {
+                dialogTable.deleteRows(at: [indexPath], with: .automatic)
+                dialogTable.insertRows(at: [newIndexPath], with: .automatic)
+            }
+        case .update:
+            if let indexPath = indexPath {
+                dialogTable.reloadRows(at: [indexPath], with: .automatic)
+            }
+        case .delete:
+            if let indexPath = indexPath {
+                dialogTable.deleteRows(at: [indexPath], with: .automatic)
+            }
+        default:
+            break
+        }
+    }
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.dialogTable.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.dialogTable.endUpdates()
     }
 }
