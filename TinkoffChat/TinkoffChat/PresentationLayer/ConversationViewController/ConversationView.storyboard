@@ -72,11 +72,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="4vK-3h-e0F"/>
                     <connections>
-                        <outlet property="dialogTableView" destination="uWt-3c-dvO" id="XYa-ya-vrr"/>
+                        <outlet property="dialogTableView" destination="uWt-3c-dvO" id="c9U-nt-adN"/>
                         <outlet property="noMessagesLabel" destination="tDx-pQ-aga" id="CbZ-7S-IV3"/>
                         <outlet property="sendMessageButton" destination="jkg-Wd-FKj" id="dvP-vz-OeQ"/>
                         <outlet property="sendMessageView" destination="zee-8c-KCh" id="DVZ-Oo-laf"/>
-                        <outlet property="textToSendTextField" destination="yXg-as-U2V" id="CaI-IB-Uqh"/>
+                        <outlet property="textToSendTextField" destination="yXg-as-U2V" id="oB0-Wi-MYm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uSL-SR-Dk0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

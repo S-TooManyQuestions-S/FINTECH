@@ -12,6 +12,7 @@
         <!--Themes View Controller-->
         <scene sceneID="DOh-cT-Cda">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mqH-Os-Usx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="q1c-Pp-lQI" customClass="ThemesViewController" customModule="TinkoffChat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H28-NP-h2v">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
@@ -172,7 +173,6 @@
                         <outlet property="nightThemeView" destination="VmS-rQ-5BB" id="c2v-al-cyV"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mqH-Os-Usx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2820" y="-591"/>
         </scene>

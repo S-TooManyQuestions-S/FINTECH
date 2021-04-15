@@ -28,7 +28,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="yaO-gO-jOa" kind="show" identifier="SegueToDialog" id="0mT-mh-kFO"/>
+                                            <segue destination="ooU-zM-pq2" kind="show" identifier="SegueToDialog" id="0mT-mh-kFO"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -69,7 +69,7 @@
                                 </connections>
                             </button>
                             <connections>
-                                <segue destination="H4M-AF-nn3" kind="show" identifier="Settings" id="qSp-kx-CeX"/>
+                                <segue destination="aIB-H7-2IW" kind="show" identifier="Settings" id="qSp-kx-CeX"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" id="5V4-Pk-NvV">
@@ -82,7 +82,7 @@
                                 </connections>
                             </button>
                             <connections>
-                                <segue destination="GXV-FW-fM6" kind="presentation" identifier="ProfileID" modalPresentationStyle="pageSheet" id="IV9-3I-8Vx"/>
+                                <segue destination="ZKK-Yf-3ee" kind="presentation" identifier="ProfileID" modalPresentationStyle="pageSheet" id="IV9-3I-8Vx"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -115,30 +115,30 @@
             <point key="canvasLocation" x="1096.8" y="89.505247376311857"/>
         </scene>
         <!--ThemesView-->
-        <scene sceneID="IqC-Fu-XLK">
+        <scene sceneID="WC5-6M-ddD">
             <objects>
-                <viewControllerPlaceholder storyboardName="ThemesView" id="H4M-AF-nn3" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="jM5-rQ-3An"/>
+                <viewControllerPlaceholder storyboardName="ThemesView" id="aIB-H7-2IW" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="X8P-7k-mPE"/>
                 </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="elm-Y8-XoU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VaJ-jq-1MF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2607" y="-596"/>
+            <point key="canvasLocation" x="2631" y="-589"/>
         </scene>
         <!--ProfileView-->
-        <scene sceneID="BVE-WX-11B">
+        <scene sceneID="2k4-IF-MKQ">
             <objects>
-                <viewControllerPlaceholder storyboardName="ProfileView" id="GXV-FW-fM6" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sTb-dc-bES" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="ProfileView" id="ZKK-Yf-3ee" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WHi-th-5nm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2700" y="110"/>
+            <point key="canvasLocation" x="2820" y="89.505247376311857"/>
         </scene>
         <!--ConversationView-->
-        <scene sceneID="2ps-NR-MX8">
+        <scene sceneID="WI1-iW-FHW">
             <objects>
-                <viewControllerPlaceholder storyboardName="ConversationView" id="yaO-gO-jOa" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="lyq-mg-QOT"/>
+                <viewControllerPlaceholder storyboardName="ConversationView" id="ooU-zM-pq2" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="uY2-qc-CSx"/>
                 </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JsD-h6-jFv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NiR-Zw-yc7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2820" y="859.52023988005999"/>
         </scene>

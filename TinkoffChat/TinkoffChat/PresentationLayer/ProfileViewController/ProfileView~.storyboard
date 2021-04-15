@@ -69,7 +69,7 @@
                                 </connections>
                             </button>
                             <connections>
-                                <segue destination="QJQ-Za-XGH" kind="show" identifier="Settings" id="qSp-kx-CeX"/>
+                                <segue destination="aIB-H7-2IW" kind="show" identifier="Settings" id="qSp-kx-CeX"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" id="5V4-Pk-NvV">
@@ -356,14 +356,14 @@
             <point key="canvasLocation" x="1096.8" y="89.505247376311857"/>
         </scene>
         <!--ThemesView-->
-        <scene sceneID="3Pu-f9-yHR">
+        <scene sceneID="WC5-6M-ddD">
             <objects>
-                <viewControllerPlaceholder storyboardName="ThemesView" id="QJQ-Za-XGH" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="NHV-Dn-Ylh"/>
+                <viewControllerPlaceholder storyboardName="ThemesView" id="aIB-H7-2IW" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="X8P-7k-mPE"/>
                 </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ryV-dY-fLs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VaJ-jq-1MF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2607" y="-599"/>
+            <point key="canvasLocation" x="2631" y="-589"/>
         </scene>
     </scenes>
     <resources>

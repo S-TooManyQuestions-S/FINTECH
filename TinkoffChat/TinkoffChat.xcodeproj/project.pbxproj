@@ -28,10 +28,10 @@
 		6A4B9CD225DC2950000E5E29 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4B9CD125DC2950000E5E29 /* ProfileViewController.swift */; };
 		6A4B9CD725DC2957000E5E29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A4B9CD625DC2957000E5E29 /* Assets.xcassets */; };
 		6A4B9CDA25DC2957000E5E29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A4B9CD825DC2957000E5E29 /* LaunchScreen.storyboard */; };
-		6A5D98812628F19F00152288 /* ConversationsView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A5D98802628F19F00152288 /* ConversationsView.storyboard */; };
-		6A5D98852628F1D000152288 /* ThemesView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A5D98842628F1D000152288 /* ThemesView.storyboard */; };
-		6A5D98882628F1E600152288 /* ProfileView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A5D98872628F1E600152288 /* ProfileView.storyboard */; };
-		6A5D988B2628F1FB00152288 /* ConversationView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A5D988A2628F1FB00152288 /* ConversationView.storyboard */; };
+		6A62955F2628F936004BA9F8 /* ConversationsView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A62955E2628F936004BA9F8 /* ConversationsView.storyboard */; };
+		6A6295692628F9AA004BA9F8 /* ThemesView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A6295682628F9AA004BA9F8 /* ThemesView.storyboard */; };
+		6A62956C2628F9D5004BA9F8 /* ProfileView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A62956B2628F9D5004BA9F8 /* ProfileView.storyboard */; };
+		6A62956F2628F9ED004BA9F8 /* ConversationView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A62956E2628F9ED004BA9F8 /* ConversationView.storyboard */; };
 		6A65F1972601343E00BFD826 /* GCDSaveHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A65F1962601343E00BFD826 /* GCDSaveHandler.swift */; };
 		6A65F19B260136DE00BFD826 /* SaveHandlerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A65F19A260136DE00BFD826 /* SaveHandlerProtocol.swift */; };
 		6A65F1A12601396100BFD826 /* FileInteractionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A65F1A02601396100BFD826 /* FileInteractionHandler.swift */; };
@@ -92,10 +92,10 @@
 		6A4B9CD625DC2957000E5E29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6A4B9CD925DC2957000E5E29 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6A4B9CDB25DC2957000E5E29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6A5D98802628F19F00152288 /* ConversationsView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ConversationsView.storyboard; sourceTree = "<group>"; };
-		6A5D98842628F1D000152288 /* ThemesView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ThemesView.storyboard; sourceTree = "<group>"; };
-		6A5D98872628F1E600152288 /* ProfileView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ProfileView.storyboard; sourceTree = "<group>"; };
-		6A5D988A2628F1FB00152288 /* ConversationView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ConversationView.storyboard; sourceTree = "<group>"; };
+		6A62955E2628F936004BA9F8 /* ConversationsView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ConversationsView.storyboard; sourceTree = "<group>"; };
+		6A6295682628F9AA004BA9F8 /* ThemesView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ThemesView.storyboard; path = TinkoffChat/PresentationLayer/ThemesViewController/ThemesView.storyboard; sourceTree = SOURCE_ROOT; };
+		6A62956B2628F9D5004BA9F8 /* ProfileView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ProfileView.storyboard; path = TinkoffChat/PresentationLayer/ProfileViewController/ProfileView.storyboard; sourceTree = SOURCE_ROOT; };
+		6A62956E2628F9ED004BA9F8 /* ConversationView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ConversationView.storyboard; path = TinkoffChat/PresentationLayer/ConversationViewController/ConversationView.storyboard; sourceTree = SOURCE_ROOT; };
 		6A65F1962601343E00BFD826 /* GCDSaveHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDSaveHandler.swift; sourceTree = "<group>"; };
 		6A65F19A260136DE00BFD826 /* SaveHandlerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveHandlerProtocol.swift; sourceTree = "<group>"; };
 		6A65F1A02601396100BFD826 /* FileInteractionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInteractionHandler.swift; sourceTree = "<group>"; };
@@ -182,7 +182,7 @@
 		6A41867F25EE9E9C001A9538 /* ConversationListViewController */ = {
 			isa = PBXGroup;
 			children = (
-				6A5D98802628F19F00152288 /* ConversationsView.storyboard */,
+				6A62955E2628F936004BA9F8 /* ConversationsView.storyboard */,
 				6AAC4FB326263C65002E9938 /* ConversationListModel */,
 				6A41867225EE8B7F001A9538 /* ConversationsListViewController.swift */,
 			);
@@ -308,7 +308,7 @@
 		6AAC4F9A2626346B002E9938 /* ProfileViewController */ = {
 			isa = PBXGroup;
 			children = (
-				6A5D98872628F1E600152288 /* ProfileView.storyboard */,
+				6A62956B2628F9D5004BA9F8 /* ProfileView.storyboard */,
 				6A4B9CD125DC2950000E5E29 /* ProfileViewController.swift */,
 			);
 			path = ProfileViewController;
@@ -325,7 +325,7 @@
 		6AAC4F9C262634A5002E9938 /* ThemesViewController */ = {
 			isa = PBXGroup;
 			children = (
-				6A5D98842628F1D000152288 /* ThemesView.storyboard */,
+				6A6295682628F9AA004BA9F8 /* ThemesView.storyboard */,
 				6A01247325F929770030188F /* ThemesViewController.swift */,
 			);
 			path = ThemesViewController;
@@ -334,7 +334,7 @@
 		6AAC4F9E262634DB002E9938 /* ConversationViewController */ = {
 			isa = PBXGroup;
 			children = (
-				6A5D988A2628F1FB00152288 /* ConversationView.storyboard */,
+				6A62956E2628F9ED004BA9F8 /* ConversationView.storyboard */,
 				6AF723D426264A170061938C /* ConversationModel */,
 				6AF9D28525EFDCF70087B1EE /* ConversationViewController.swift */,
 			);
@@ -598,13 +598,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A113F6425EFEABD00FB643C /* MessageCell.xib in Resources */,
-				6A5D98882628F1E600152288 /* ProfileView.storyboard in Resources */,
-				6A5D98852628F1D000152288 /* ThemesView.storyboard in Resources */,
+				6A62956C2628F9D5004BA9F8 /* ProfileView.storyboard in Resources */,
+				6A6295692628F9AA004BA9F8 /* ThemesView.storyboard in Resources */,
 				6A4B9CDA25DC2957000E5E29 /* LaunchScreen.storyboard in Resources */,
 				6A4B9CD725DC2957000E5E29 /* Assets.xcassets in Resources */,
-				6A5D98812628F19F00152288 /* ConversationsView.storyboard in Resources */,
+				6A62955F2628F936004BA9F8 /* ConversationsView.storyboard in Resources */,
 				6A41867825EE8E4B001A9538 /* ConversationCell.xib in Resources */,
-				6A5D988B2628F1FB00152288 /* ConversationView.storyboard in Resources */,
+				6A62956F2628F9ED004BA9F8 /* ConversationView.storyboard in Resources */,
 				6A34BE27260D327500E11010 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
