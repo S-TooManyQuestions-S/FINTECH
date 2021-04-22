@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1Jp-lm-VMm">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Conversation View Controller-->
+        <scene sceneID="Yhb-jW-gZJ">
+            <objects>
+                <viewController id="1Jp-lm-VMm" customClass="ConversationViewController" customModule="TinkoffChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="V9g-D9-yx1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uWt-3c-dvO">
+                                <rect key="frame" x="0.0" y="44" width="414" height="750.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zee-8c-KCh">
+                                <rect key="frame" x="0.0" y="794.5" width="414" height="67.5"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write a message..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yXg-as-U2V">
+                                        <rect key="frame" x="8" y="16.5" width="330" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jkg-Wd-FKj">
+                                        <rect key="frame" x="356.5" y="18.5" width="49.5" height="30"/>
+                                        <state key="normal" title="Send"/>
+                                        <connections>
+                                            <action selector="sendMessageButtonPressed:" destination="1Jp-lm-VMm" eventType="touchUpInside" id="oUy-94-MDn"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="yXg-as-U2V" firstAttribute="centerY" secondItem="zee-8c-KCh" secondAttribute="centerY" id="2KM-hh-PXZ"/>
+                                    <constraint firstItem="yXg-as-U2V" firstAttribute="leading" secondItem="zee-8c-KCh" secondAttribute="leading" constant="8" id="9yx-TL-OHn"/>
+                                    <constraint firstItem="jkg-Wd-FKj" firstAttribute="width" secondItem="zee-8c-KCh" secondAttribute="width" multiplier="0.12" id="FDg-pY-hbN"/>
+                                    <constraint firstItem="yXg-as-U2V" firstAttribute="width" secondItem="zee-8c-KCh" secondAttribute="width" multiplier="0.797333" id="N66-Jx-qrM"/>
+                                    <constraint firstItem="jkg-Wd-FKj" firstAttribute="leading" relation="lessThanOrEqual" secondItem="yXg-as-U2V" secondAttribute="trailing" constant="24" id="PZF-bK-7DL"/>
+                                    <constraint firstItem="jkg-Wd-FKj" firstAttribute="centerY" secondItem="zee-8c-KCh" secondAttribute="centerY" id="Pb8-3Z-u1a"/>
+                                    <constraint firstAttribute="trailing" secondItem="jkg-Wd-FKj" secondAttribute="trailing" constant="8" id="z8E-EM-N4N"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No messages yet" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tDx-pQ-aga">
+                                <rect key="frame" x="141" y="443" width="132" height="20"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ebC-ep-9tv"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="zee-8c-KCh" firstAttribute="leading" secondItem="ebC-ep-9tv" secondAttribute="leading" id="0yw-wA-Dpf"/>
+                            <constraint firstItem="uWt-3c-dvO" firstAttribute="top" secondItem="ebC-ep-9tv" secondAttribute="top" id="2A8-a4-2rG"/>
+                            <constraint firstItem="tDx-pQ-aga" firstAttribute="centerY" secondItem="ebC-ep-9tv" secondAttribute="centerY" id="8dF-IM-03q"/>
+                            <constraint firstItem="zee-8c-KCh" firstAttribute="bottom" secondItem="ebC-ep-9tv" secondAttribute="bottom" id="BKT-Oh-goT"/>
+                            <constraint firstItem="zee-8c-KCh" firstAttribute="top" secondItem="uWt-3c-dvO" secondAttribute="bottom" id="Hvk-0b-dKx"/>
+                            <constraint firstItem="zee-8c-KCh" firstAttribute="trailing" secondItem="ebC-ep-9tv" secondAttribute="trailing" id="L6m-Bn-sBj"/>
+                            <constraint firstItem="zee-8c-KCh" firstAttribute="height" secondItem="V9g-D9-yx1" secondAttribute="height" multiplier="0.0754414" id="MED-f0-7VT"/>
+                            <constraint firstItem="uWt-3c-dvO" firstAttribute="trailing" secondItem="ebC-ep-9tv" secondAttribute="trailing" id="RJQ-Ra-gp7"/>
+                            <constraint firstItem="uWt-3c-dvO" firstAttribute="leading" secondItem="ebC-ep-9tv" secondAttribute="leading" id="gGZ-ku-d0D"/>
+                            <constraint firstItem="tDx-pQ-aga" firstAttribute="centerX" secondItem="ebC-ep-9tv" secondAttribute="centerX" id="gXL-NI-a5r"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="4vK-3h-e0F"/>
+                    <connections>
+                        <outlet property="dialogTableView" destination="uWt-3c-dvO" id="c9U-nt-adN"/>
+                        <outlet property="noMessagesLabel" destination="tDx-pQ-aga" id="CbZ-7S-IV3"/>
+                        <outlet property="sendMessageButton" destination="jkg-Wd-FKj" id="dvP-vz-OeQ"/>
+                        <outlet property="sendMessageView" destination="zee-8c-KCh" id="DVZ-Oo-laf"/>
+                        <outlet property="textToSendTextField" destination="yXg-as-U2V" id="oB0-Wi-MYm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uSL-SR-Dk0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2820" y="859.52023988005999"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

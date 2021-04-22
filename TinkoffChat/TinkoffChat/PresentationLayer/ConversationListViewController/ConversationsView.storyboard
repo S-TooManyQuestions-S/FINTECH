@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eKO-BU-b4V">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Conversations List View Controller-->
+        <scene sceneID="YxE-Sn-kk2">
+            <objects>
+                <viewController id="4ZS-lK-sJl" customClass="ConversationsListViewController" customModule="TinkoffChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UXf-fX-WVd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bMq-Pa-67K">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DialogCell" id="mRB-dj-zJR" customClass="ConversationCell" customModule="TinkoffChat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mRB-dj-zJR" id="7Nc-i9-aUQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="348" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="ooU-zM-pq2" kind="show" identifier="SegueToDialog" id="0mT-mh-kFO"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rYS-vO-Az7">
+                                <rect key="frame" x="313" y="557" width="46" height="46"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="rYS-vO-Az7" secondAttribute="height" multiplier="1:1" id="DMO-ZQ-6a3"/>
+                                </constraints>
+                                <state key="normal" image="AddChanel"/>
+                                <connections>
+                                    <action selector="addNewChanelButtonPressed:" destination="4ZS-lK-sJl" eventType="touchUpInside" id="cFL-iM-KTM"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="q0k-gv-JpF"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="q0k-gv-JpF" firstAttribute="trailing" secondItem="bMq-Pa-67K" secondAttribute="trailing" id="2og-Ps-f55"/>
+                            <constraint firstItem="bMq-Pa-67K" firstAttribute="top" secondItem="q0k-gv-JpF" secondAttribute="top" id="CPc-hb-Rxk"/>
+                            <constraint firstItem="q0k-gv-JpF" firstAttribute="trailing" secondItem="rYS-vO-Az7" secondAttribute="trailing" constant="16" id="jW2-an-Q0B"/>
+                            <constraint firstItem="bMq-Pa-67K" firstAttribute="leading" secondItem="q0k-gv-JpF" secondAttribute="leading" id="kSc-mo-GHA"/>
+                            <constraint firstAttribute="bottom" secondItem="bMq-Pa-67K" secondAttribute="bottom" id="oY9-Wa-EqH"/>
+                            <constraint firstItem="rYS-vO-Az7" firstAttribute="width" secondItem="UXf-fX-WVd" secondAttribute="width" multiplier="0.122667" id="orK-be-MCx"/>
+                            <constraint firstItem="q0k-gv-JpF" firstAttribute="bottom" secondItem="rYS-vO-Az7" secondAttribute="bottom" constant="20" id="yd3-Of-r84"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="FKl-4K-HFo">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="gcb-Nx-iya">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lDy-C3-vfa">
+                                <rect key="frame" x="16" y="9.5" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Settings">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                </state>
+                                <connections>
+                                    <action selector="settingsButtonPressed:" destination="4ZS-lK-sJl" eventType="touchUpInside" id="zzp-RO-YJV"/>
+                                </connections>
+                            </button>
+                            <connections>
+                                <segue destination="aIB-H7-2IW" kind="show" identifier="Settings" id="qSp-kx-CeX"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="5V4-Pk-NvV">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="iVn-IY-emk">
+                                <rect key="frame" x="309" y="3" width="50" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Profile"/>
+                                <connections>
+                                    <action selector="profileButtonPressed:" destination="4ZS-lK-sJl" eventType="touchUpInside" id="gRw-Pa-ca3"/>
+                                </connections>
+                            </button>
+                            <connections>
+                                <segue destination="ZKK-Yf-3ee" kind="presentation" identifier="ProfileID" modalPresentationStyle="pageSheet" id="IV9-3I-8Vx"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addNewChanelButton" destination="rYS-vO-Az7" id="75i-Z5-P3d"/>
+                        <outlet property="messageTable" destination="bMq-Pa-67K" id="TWs-wO-8sf"/>
+                        <outlet property="userButton" destination="iVn-IY-emk" id="VIZ-nQ-j40"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jIo-aU-7Su" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2028" y="89.505247376311857"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="0Ad-Yd-2Wo">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eKO-BU-b4V" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="0u6-XR-FhX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="4ZS-lK-sJl" kind="relationship" relationship="rootViewController" id="Vph-Uw-saJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1he-zF-C5K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1096.8" y="89.505247376311857"/>
+        </scene>
+        <!--ThemesView-->
+        <scene sceneID="WC5-6M-ddD">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ThemesView" id="aIB-H7-2IW" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="X8P-7k-mPE"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VaJ-jq-1MF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2631" y="-589"/>
+        </scene>
+        <!--ProfileView-->
+        <scene sceneID="2k4-IF-MKQ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ProfileView" id="ZKK-Yf-3ee" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WHi-th-5nm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2820" y="89.505247376311857"/>
+        </scene>
+        <!--ConversationView-->
+        <scene sceneID="WI1-iW-FHW">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ConversationView" id="ooU-zM-pq2" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="uY2-qc-CSx"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NiR-Zw-yc7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2820" y="859.52023988005999"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="AddChanel" width="512" height="512"/>
+        <image name="Settings" width="25" height="25"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

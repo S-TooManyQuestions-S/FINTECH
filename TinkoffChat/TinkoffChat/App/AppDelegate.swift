@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
-        FireBaseHandler.shared.showDetailedDataChannels()
+        // RootAssembly.serviceAssembly.coreDataHandler.showDetailedDataChannels()
         // Override point for customization after application launch.
         return true
     }
