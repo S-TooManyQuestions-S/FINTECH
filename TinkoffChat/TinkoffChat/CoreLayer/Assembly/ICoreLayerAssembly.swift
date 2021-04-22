@@ -17,4 +17,6 @@ class ICoreLayerAssembly: ICoreLayerAssemblyProtocol {
     var userIdSaveHandler: UserIDSaveHandlerProtocol = UserIDSaveHandler()
     
     var themeSaveHandler: ThemeSaveHandlerProtocol = ThemeSaveHandler()
+    
+    var requestSender: IRequestSender = RequestSender(with: URLSession.shared)
 }

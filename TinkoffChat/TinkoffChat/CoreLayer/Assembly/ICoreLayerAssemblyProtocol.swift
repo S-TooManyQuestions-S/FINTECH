@@ -13,4 +13,5 @@ protocol ICoreLayerAssemblyProtocol {
     var saveHandler: SaveHandlerProtocol {get}
     var userIdSaveHandler: UserIDSaveHandlerProtocol {get}
     var themeSaveHandler: ThemeSaveHandlerProtocol {get}
+    var requestSender: IRequestSender {get}
 }

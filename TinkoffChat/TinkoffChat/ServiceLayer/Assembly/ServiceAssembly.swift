@@ -17,4 +17,5 @@ class ServiceAssembly: IServicesAssemblyProtocol {
     
     var coreDataHandler: CoreDataHandlerProtocol = CoreDataHandler()
     
+    var networkHandler: NetworkHandlerProtocol = NetworkHandler(with: RootAssembly.coreLayerAssembly.requestSender)
 }
