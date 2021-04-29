@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -12,11 +14,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ProfileViewController" customModule="TinkoffChat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I1i-y9-lzW">
-                                <rect key="frame" x="63.5" y="582" width="248" height="35"/>
+                                <rect key="frame" x="63.5" y="797" width="287" height="35"/>
                                 <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="OB4-jN-zcx"/>
@@ -30,16 +32,16 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="6j0-jC-uZR">
-                                <rect key="frame" x="67.5" y="15" width="240" height="240"/>
+                                <rect key="frame" x="74.5" y="59" width="265" height="265"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XWE-Cc-8RV">
-                                        <rect key="frame" x="43" y="59" width="154" height="122"/>
+                                        <rect key="frame" x="55.5" y="71.5" width="154" height="122"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="102"/>
                                         <color key="textColor" red="0.21176470588235294" green="0.21568627450980393" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="highlightedColor" systemColor="labelColor"/>
                                     </label>
                                     <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dpJ-wm-E3K">
-                                        <rect key="frame" x="0.0" y="0.0" width="240" height="240"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="265" height="265"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.89411764705882346" green="0.90980392156862744" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
@@ -54,7 +56,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1hV-6u-tnm">
-                                <rect key="frame" x="14" y="15" width="43" height="32"/>
+                                <rect key="frame" x="14" y="59" width="50" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="43" id="f0K-Ni-hJz"/>
                                 </constraints>
@@ -65,10 +67,10 @@
                                 </connections>
                             </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1zf-G3-8R8">
-                                <rect key="frame" x="16" y="524" width="343" height="93"/>
+                                <rect key="frame" x="17.5" y="703" width="379" height="129"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="343" placeholderIntrinsicHeight="34" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dGT-oK-Uz2">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="37"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="379" height="51.5"/>
                                         <color key="backgroundColor" red="0.90987461810000003" green="0.90969592330000004" blue="0.9176481366" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                         <state key="normal" title="Cancel"/>
@@ -77,7 +79,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nTK-uX-NaP">
-                                        <rect key="frame" x="0.0" y="47" width="166.5" height="37.5"/>
+                                        <rect key="frame" x="0.0" y="61.5" width="184.5" height="51.5"/>
                                         <color key="backgroundColor" red="0.90987461810000003" green="0.90969592330000004" blue="0.9176481366" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                         <state key="normal" title="Save GCD"/>
@@ -86,7 +88,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Agd-vv-ghI">
-                                        <rect key="frame" x="176.5" y="47" width="166.5" height="37.5"/>
+                                        <rect key="frame" x="194.5" y="61.5" width="184.5" height="51.5"/>
                                         <color key="backgroundColor" red="0.90987461810000003" green="0.90969592330000004" blue="0.9176481366" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                         <state key="normal" title="Save Operations"/>
@@ -111,7 +113,7 @@
                                 </constraints>
                             </view>
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="ФИО" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tLJ-IM-aLU">
-                                <rect key="frame" x="85.5" y="287" width="204" height="30.5"/>
+                                <rect key="frame" x="94.5" y="356" width="225" height="30.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30.5" id="fYI-hX-RpG"/>
                                 </constraints>
@@ -119,14 +121,14 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bouncesZoom="NO" editable="NO" text="Additional information goes here, try to describe your professional experience or some hobbies, that you find interesting" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2YT-8A-gvX">
-                                <rect key="frame" x="43.5" y="325" width="288" height="129.5"/>
+                                <rect key="frame" x="48" y="394" width="318" height="179"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="BBt-IL-vGC">
-                                <rect key="frame" x="177.5" y="462.5" width="20" height="20"/>
+                                <rect key="frame" x="197" y="581" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -168,11 +170,22 @@
                         <outlet property="saveOperationButton" destination="Agd-vv-ghI" id="1hl-AE-VQN"/>
                         <outlet property="userIcon" destination="6j0-jC-uZR" id="AjY-IB-Fo9"/>
                         <outlet property="userImage" destination="dpJ-wm-E3K" id="drW-jd-Wo6"/>
+                        <segue destination="aU2-RP-DlV" kind="presentation" identifier="toImagePickerCollectionView" id="ssP-au-6So"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2820" y="89.505247376311857"/>
+            <point key="canvasLocation" x="2749" y="88"/>
+        </scene>
+        <!--ImagePickerCollectionView-->
+        <scene sceneID="SLo-eM-Yrk">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ImagePickerCollectionView" id="aU2-RP-DlV" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="jDw-lp-UOW"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZiV-bg-1Hz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5077" y="74"/>
         </scene>
     </scenes>
     <resources>

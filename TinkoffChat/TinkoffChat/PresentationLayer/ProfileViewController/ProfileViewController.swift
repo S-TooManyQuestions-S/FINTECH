@@ -348,11 +348,20 @@ extension ProfileViewController {
         alert.addAction(UIAlertAction(title: "Make a photo", style: .default, handler: { (_)in
             self.makeAPhoto()
         }))
+        alert.addAction(UIAlertAction(title: "Download", style: .default, handler: {(_) in
+            self.performSegue(withIdentifier: "toImagePickerCollectionView", sender: nil)
+        }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_)in
             
         }))
         
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationController = segue.destination as? ImagePickerCollectionViewController {
+            destinationController.imagePicker = self
+        }
     }
 }
 
@@ -363,6 +372,17 @@ extension ProfileViewController: UITextViewDelegate {
             saveOperationButton.isEnabled = true
         }
     }
+}
+
+extension ProfileViewController: ImagePickerDelegate {
+    func pickNetImage(image: UIImage) {
+        userImage.image = image
+        userImage.isHidden = false
+        
+        saveGCDButton.isEnabled = true
+        saveOperationButton.isEnabled = true
+    }
+    
 }
 /*
 extension UIAlertController{

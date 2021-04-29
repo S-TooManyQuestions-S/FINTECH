@@ -16,4 +16,6 @@ protocol IServicesAssemblyProtocol {
     var saveHandlers: SaveHandlerProtocol {get}
     
     var coreDataHandler: CoreDataHandlerProtocol {get}
+    
+    var networkHandler: NetworkHandlerProtocol {get}
 }
