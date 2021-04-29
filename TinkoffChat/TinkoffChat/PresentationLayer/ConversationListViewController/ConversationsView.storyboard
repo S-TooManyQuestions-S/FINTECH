@@ -82,7 +82,7 @@
                                 </connections>
                             </button>
                             <connections>
-                                <segue destination="ZKK-Yf-3ee" kind="presentation" identifier="ProfileID" modalPresentationStyle="pageSheet" id="IV9-3I-8Vx"/>
+                                <segue destination="ZKK-Yf-3ee" kind="presentation" identifier="ProfileID" customClass="MyCustomSegue" customModule="TinkoffChat" customModuleProvider="target" modalPresentationStyle="pageSheet" id="IV9-3I-8Vx"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
