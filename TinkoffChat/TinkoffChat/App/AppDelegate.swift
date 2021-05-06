@@ -11,15 +11,63 @@ import Firebase
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    var window: UIWindow?
+    lazy var tinkoffCell: CAEmitterCell = {
+        var tinkoffCell = CAEmitterCell()
+        tinkoffCell.contents = UIImage(named: "tinkoffCell")?.cgImage
+        tinkoffCell.scale = 0.5
+        tinkoffCell.scaleRange = 0.3
+        tinkoffCell.emissionRange = 2 * .pi
+        tinkoffCell.lifetime = 1
+        tinkoffCell.birthRate = 15
+        tinkoffCell.spin = -5
+        tinkoffCell.spinRange = 1.0
+        
+        tinkoffCell.velocity = -30
+        tinkoffCell.velocityRange = -20
 
+        return tinkoffCell
+    }()
+    
+    lazy var tinkoffLayer: CAEmitterLayer  = {
+        let tinkoffLayer = CAEmitterLayer()
+        
+        guard let window = window else {
+            tinkoffLayer.emitterSize = .zero
+            return tinkoffLayer
+        }
+        
+        tinkoffLayer.emitterSize = window.bounds.size
+        tinkoffLayer.emitterCells = [tinkoffCell]
+        tinkoffLayer.timeOffset = CFTimeInterval(arc4random_uniform(6) + 5)
+        return tinkoffLayer
+    }()
+    
+    var window: UIWindow?
+    
+    @objc func longGesturePress(gesture: UIGestureRecognizer) {
+        switch gesture.state {
+        case .began:
+            window?.layer.addSublayer(tinkoffLayer)
+            tinkoffLayer.emitterPosition = gesture.location(in: window)
+            tinkoffLayer.beginTime = CACurrentMediaTime()
+        case .changed:
+            tinkoffLayer.emitterPosition = gesture.location(in: window)
+        case .ended:
+            tinkoffLayer.removeFromSuperlayer()
+        default:
+            print("nothing")
+        }
+    }
+    
     // Вызывается при успешном запуске приложения
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        let laterActionPress = UILongPressGestureRecognizer(target: self, action: #selector(longGesturePress(gesture:)))
+        laterActionPress.minimumPressDuration = 0.5
+        window?.addGestureRecognizer(laterActionPress)
+        
         Logger.logProcess(fullDescription: "Application moved from <Not running> to <Inactive>: \(#function)")
-        
         FirebaseApp.configure()
-        
         // RootAssembly.serviceAssembly.coreDataHandler.showDetailedDataChannels()
         // Override point for customization after application launch.
         return true

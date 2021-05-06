@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ConversationCellConfiguration: class {
+protocol ConversationCellConfiguration: AnyObject {
     var identifier: String {get}
     var name: String {get}
     var lastMessage: String? {get}

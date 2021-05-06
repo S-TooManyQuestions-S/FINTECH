@@ -36,9 +36,15 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     // other constants
     let pickerController = UIImagePickerController()
-    let loadSaveHandlers: [SaveHandlerProtocol] = [GCDSaveHandler(), OperationSaveHandler()]
-    var savedUserData: UserProfileProtocol = UserProfile(fullName: "ФИО", description: "Your description goes here", profileImage: UIImage())
+    let loadSaveHandlers = (GCD: GCDSaveHandler(),
+                             Operation: OperationSaveHandler())
     
+    // variables
+    var savedUserData: UserProfileProtocol = UserProfile(fullName: "ФИО",
+                                                         description: "Your description goes here",
+                                                         profileImage: UIImage())
+    
+    // IBActions
     @IBAction func backButtonPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -47,46 +53,44 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         prepareForCurrentMode(editingMode: false)
         loadData()
     }
+    
     @IBAction func saveDataUsingGCDButtonPressed(_ sender: Any) {
         loadingIndicator.isHidden = false
         loadingIndicator.startAnimating()
-        self.loadSaveHandlers[0].writeData(newData: UserProfile(fullName: self.nameLabel.text,
+        
+        self.loadSaveHandlers.GCD.writeData(newData: UserProfile(fullName: self.nameLabel.text,
                                                                 description: self.describeLabel.text,
                                                                 profileImage: self.userImage.image),
                                            completion: self.showSaveAlert(isSuccessfull:isGCDUsed:))
+        
         self.prepareForCurrentMode(editingMode: false)
-        self.editButton.isEnabled = false
+        // self.editButton.isEnabled = false
         
     }
+    
     @IBAction func saveDataUsingOperationsButtonPressed(_ sender: Any) {
         loadingIndicator.isHidden = false
         loadingIndicator.startAnimating()
-        self.loadSaveHandlers[1].writeData(newData: UserProfile(fullName: self.nameLabel.text,
+        
+        self.loadSaveHandlers.Operation.writeData(newData: UserProfile(fullName: self.nameLabel.text,
                                                                 description: self.describeLabel.text,
                                                                 profileImage: self.userImage.image),
                                            completion: self.showSaveAlert(isSuccessfull:isGCDUsed:))
+        
         self.prepareForCurrentMode(editingMode: false)
-        self.editButton.isEnabled = false
+        // self.editButton.isEnabled = false
     }
+    
+    var edit: Bool = false
     
     @IBAction func editButtonTouched(_ sender: Any) {
-        prepareForCurrentMode(editingMode: true)
+        if edit {
+           cancelButtonPressed(self)
+        } else {
+            prepareForCurrentMode(editingMode: true)
+        }
+        
     }
-   
-    /*
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        Logger.logProcess(fullDescription: "Edit button frame in <init?> is: \(editButton.frame)")
-        На данном этапе editButton имеет значение nil
-        Правильное описание: view еще не загрузилась - дочерние вьюшки еще не существуют, тоесть nil.
-    
-        Когда вы перетаскиваете объект на раскадровку и настраиваете его,
-        Interface Builder сериализует состояние этого объекта на диске,
-        а затем десериализует его, когда раскадровка появляется на экране.
-        Вам нужно рассказать Interface Builder, как это сделать,
-        для этого вызывается метод init, однако при вызове кнопка editButton еще не инициализирована, десериализация только началась
-    }
- */
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -119,6 +123,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleImageTap(_:)))
         userIcon.addGestureRecognizer(tap)
         
+        nameLabel.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
+
         /* Правильное описание:
          В данный момент View только загрузилась из связанного storyboard файла и frame указаны в соответствии с текущими значениями для выбранного в сториборд устройстве.*/
         Logger.logFieldValue(field: "editButton", value: "\(editButton.frame)", in: #function)
@@ -139,8 +145,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         useCurrentTheme()
         
-        nameLabel.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
-        
         loadingIndicator.isHidden = false
         loadingIndicator.color = .red
         loadData()
@@ -149,6 +153,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
 // data manipulations extentension
 extension ProfileViewController {
+    
     @objc func editingChanged(_ textField: Any) {
         if let nameLabel = textField as? UITextField {
             guard nameLabel.text != savedUserData.fullName else {
@@ -163,7 +168,7 @@ extension ProfileViewController {
     func loadData() {
         loadingIndicator.isHidden = false
         loadingIndicator.startAnimating()
-        loadSaveHandlers[0].readData(setUpProfile(loadedProfile:))
+        loadSaveHandlers.GCD.readData(setUpProfile(loadedProfile:))
     }
     
     func setUpProfile(loadedProfile: UserProfileProtocol) {
@@ -191,72 +196,93 @@ extension ProfileViewController {
     
     // так как текущих состояний экрана всего два - переменная типа bool, но в дальнейшем можно сделать enum
     // для нескольких состояний View
+    
+    func enableEditMode() {
+        saveButtonsView.isHidden = false
+      //  editButton.isHidden = true
+        
+        nameLabel.isUserInteractionEnabled = true
+        describeLabel.isUserInteractionEnabled = true
+        describeLabel.isEditable = true
+        
+        let newPosition = nameLabel.endOfDocument
+        nameLabel.selectedTextRange = nameLabel.textRange(from: newPosition, to: newPosition)
+        nameLabel.becomeFirstResponder()
+    }
+    
+    func enableStandardMode() {
+        saveButtonsView.isHidden = true
+       // editButton.isHidden = false
+        
+        nameLabel.isUserInteractionEnabled = false
+        describeLabel.isUserInteractionEnabled = false
+        describeLabel.isEditable = false
+    }
+    
     func prepareForCurrentMode(editingMode: Bool) {
         if editingMode {
-            saveButtonsView.isHidden = false
-            editButton.isHidden = true
-            
-            nameLabel.isUserInteractionEnabled = true
-            describeLabel.isUserInteractionEnabled = true
-            describeLabel.isEditable = true
-            
-            let newPosition = nameLabel.endOfDocument
-            nameLabel.selectedTextRange = nameLabel.textRange(from: newPosition, to: newPosition)
-            nameLabel.becomeFirstResponder()
+            enableEditMode()
+            edit = true
         } else {
-            saveButtonsView.isHidden = true
-            editButton.isHidden = false
-            
-            nameLabel.isUserInteractionEnabled = false
-            describeLabel.isUserInteractionEnabled = false
-            describeLabel.isEditable = false
-            
+            enableStandardMode()
+            edit = false
         }
+        animation()
         saveGCDButton.isEnabled = false
         saveOperationButton.isEnabled = false
     }
     
+    func showSuccessAlert(isGCDUsed: Bool) {
+        let alert = UIAlertController(title: "Success!", message: "Your profile information was successfully saved!", preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        
+        self.present(alert, animated: true, completion: {
+            self.prepareForCurrentMode(editingMode: false)
+            self.loadingIndicator.stopAnimating()
+            self.loadData()
+        })
+        self.editButton.isEnabled = true
+    }
+    
+    func showFailAlert(isGCDUsed: Bool) {
+        let alert = UIAlertController(title: "Failed!",
+                                      message: "Your profile information wasn't saved due to occuried error!\nWould you like to try again?",
+                                      preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addAction(UIAlertAction(title: "Try again", style: UIAlertAction.Style.default, handler: {_ in
+            
+            if isGCDUsed {
+                self.loadSaveHandlers.GCD.writeData(newData: UserProfile(fullName: self.nameLabel.text,
+                                                                         description: self.describeLabel.text,
+                                                                         profileImage: self.userImage.image),
+                                                    completion: self.showSaveAlert(isSuccessfull:isGCDUsed:))
+            } else {
+                self.loadSaveHandlers.Operation.writeData(newData: UserProfile(fullName: self.nameLabel.text,
+                                                                               description: self.describeLabel.text,
+                                                                               profileImage: self.userImage.image),
+                                                          completion: self.showSaveAlert(isSuccessfull:isGCDUsed:))
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: {_ in
+            self.prepareForCurrentMode(editingMode: false)
+            self.loadSaveHandlers.GCD.writeData(newData: self.savedUserData, completion: {_, _ in return})
+            self.setUpProfile(loadedProfile: self.savedUserData)
+        }))
+        
+        self.present(alert, animated: true, completion: {
+            self.loadingIndicator.stopAnimating()
+        })
+        
+        self.editButton.isEnabled = true
+    }
+    
     func showSaveAlert(isSuccessfull: Bool, isGCDUsed: Bool) {
         if isSuccessfull {
-            let alert = UIAlertController(title: "Success!", message: "Your profile information was successfully saved!", preferredStyle: UIAlertController.Style.alert)
-            
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-            
-            self.present(alert, animated: true, completion: {
-                self.prepareForCurrentMode(editingMode: false)
-                self.loadingIndicator.stopAnimating()
-                self.loadData()
-            })
+            showSuccessAlert(isGCDUsed: isGCDUsed)
         } else {
-            let alert = UIAlertController(title: "Failed!",
-                                          message: "Your profile information wasn't saved due to occuried error!\nWould you like to try again?",
-                                          preferredStyle: UIAlertController.Style.alert)
-            
-            alert.addAction(UIAlertAction(title: "Try again", style: UIAlertAction.Style.default, handler: {_ in
-                
-                if isGCDUsed {
-                    self.loadSaveHandlers[0].writeData(newData: UserProfile(fullName: self.nameLabel.text,
-                                                                            description: self.describeLabel.text,
-                                                                            profileImage: self.userImage.image),
-                                                       completion: self.showSaveAlert(isSuccessfull:isGCDUsed:))
-                } else {
-                    self.loadSaveHandlers[1].writeData(newData: UserProfile(fullName: self.nameLabel.text,
-                                                                            description: self.describeLabel.text,
-                                                                            profileImage: self.userImage.image),
-                                                       completion: self.showSaveAlert(isSuccessfull:isGCDUsed:))
-                }
-            }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: {_ in
-                self.prepareForCurrentMode(editingMode: false)
-                self.loadSaveHandlers[0].writeData(newData: self.savedUserData, completion: {_, _ in return})
-                self.setUpProfile(loadedProfile: self.savedUserData)
-            }))
-            
-            self.present(alert, animated: true, completion: {
-                self.loadingIndicator.stopAnimating()
-            })
+            showFailAlert(isGCDUsed: isGCDUsed)
         }
-        self.editButton.isEnabled = true
     }
 }
 
@@ -284,8 +310,8 @@ extension ProfileViewController {
 // image picker extension
 extension ProfileViewController {
     /**
-    Функция реализующая логику установки фотографии профиля при выборе пользователем категории "choose from gallery"
-    */
+     Функция реализующая логику установки фотографии профиля при выборе пользователем категории "choose from gallery"
+     */
     func chooseFromGallery() {
         // проверка доступности галлереи
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
@@ -299,14 +325,14 @@ extension ProfileViewController {
     }
     
     /**
-    Функция реализующая логику установки фотографии профиля при выборе пользователем категории "make a photo"
-    */
+     Функция реализующая логику установки фотографии профиля при выборе пользователем категории "make a photo"
+     */
     func makeAPhoto() {
         // проверяем доступна ли камера
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             pickerController.sourceType = .camera
             self.present(pickerController, animated: true, completion: nil)
-        
+            
         } else {
             // если камера недоступна - выводим предупреждение с соответствующей пояснительной информацией
             let alert = UIAlertController(title: "Warning", message: "Camera is currently unvailable", preferredStyle: .alert)
@@ -316,12 +342,12 @@ extension ProfileViewController {
     }
     
     /**
-    Функция для обработки выбора пользователем фотографии из галлереи (или сделанное фото) (отображение ее в качестве текущей фотографии профиля)
+     Функция для обработки выбора пользователем фотографии из галлереи (или сделанное фото) (отображение ее в качестве текущей фотографии профиля)
      
-    **Parameters:**
-        - picker: контроллер для обработки выбора
-        - info: информация о выборе
-    */
+     **Parameters:**
+     - picker: контроллер для обработки выбора
+     - info: информация о выборе
+     */
     public func imagePickerController(_ picker: UIImagePickerController,
                                       didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         
@@ -382,8 +408,68 @@ extension ProfileViewController: ImagePickerDelegate {
         saveGCDButton.isEnabled = true
         saveOperationButton.isEnabled = true
     }
+}
+
+extension ProfileViewController {
+    
+    func animation() {
+        let startPosition = self.editButton.center
+        let x = startPosition.x
+        let y = startPosition.y
+        
+        if self.edit {
+            UIView.animateKeyframes(withDuration: 0.3,
+                                    delay: 0.0, options: [.repeat, .allowUserInteraction]) {
+                UIView.addKeyframe(withRelativeStartTime: 0.0,
+                                   relativeDuration: 0.06,
+                                   animations: {
+                                    self.editButton.layer.position.y = y + 5
+                                    self.editButton.layer.position.x = x + 5
+                                    self.editButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 180 * 18)
+                                   })
+                UIView.addKeyframe(withRelativeStartTime: 0.06,
+                                   relativeDuration: 0.06,
+                                   animations: {
+                                    self.editButton.layer.position.y = y - 5
+                                   })
+                
+                UIView.addKeyframe(withRelativeStartTime: 0.12,
+                                   relativeDuration: 0.06,
+                                   animations: {
+                                    self.editButton.layer.position.y = y - 5
+                                    self.editButton.layer.position.x = x - 5
+                                    self.editButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 180 * -18)
+                                   })
+                UIView.addKeyframe(withRelativeStartTime: 0.18,
+                                   relativeDuration: 0.06,
+                                   animations: {
+                                    self.editButton.layer.position.y = y + 5
+                                   })
+                
+                UIView.addKeyframe(withRelativeStartTime: 0.24,
+                                   relativeDuration: 0.06,
+                                   animations: {
+                                    self.editButton.layer.position.x = x
+                                    self.editButton.layer.position.y = y
+                                    self.editButton.transform = CGAffineTransform(rotationAngle: 0)
+                                   })
+            }
+        } else {
+            UIView.animateKeyframes(withDuration: 1,
+                                    delay: 0.0, options: [.allowUserInteraction]) {
+                UIView.addKeyframe(withRelativeStartTime: 0.0,
+                                   relativeDuration: 1,
+                                   animations: {
+                                    self.editButton.layer.removeAllAnimations()
+                                    self.editButton.center = startPosition
+                                    self.editButton.transform = CGAffineTransform(rotationAngle: 0)
+                                   })
+            }
+        }
+    }
     
 }
+
 /*
 extension UIAlertController{
     func removeRedundantConstraint(){
@@ -394,5 +480,20 @@ extension UIAlertController{
             }
         }
     }
+}
+*/
+
+/*
+required init?(coder: NSCoder) {
+    super.init(coder: coder)
+    Logger.logProcess(fullDescription: "Edit button frame in <init?> is: \(editButton.frame)")
+    На данном этапе editButton имеет значение nil
+    Правильное описание: view еще не загрузилась - дочерние вьюшки еще не существуют, тоесть nil.
+
+    Когда вы перетаскиваете объект на раскадровку и настраиваете его,
+    Interface Builder сериализует состояние этого объекта на диске,
+    а затем десериализует его, когда раскадровка появляется на экране.
+    Вам нужно рассказать Interface Builder, как это сделать,
+    для этого вызывается метод init, однако при вызове кнопка editButton еще не инициализирована, десериализация только началась
 }
 */
