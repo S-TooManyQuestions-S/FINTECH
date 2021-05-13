@@ -7,9 +7,14 @@
 
 import UIKit
 
-struct ThemesHandler: ThemesHandlerProtocol {
+class ThemesHandler: ThemesHandlerProtocol {
     private let selectedThemeKey = "selectedThemeKey"
-    private static var currentTheme: Theme?
+    private var currentTheme: Theme?
+    
+    private var themeSaveHandler: ThemeSaveHandlerProtocol?
+    init(themeSaveHandler: ThemeSaveHandlerProtocol) {
+        self.themeSaveHandler = themeSaveHandler
+    }
     
     private func loadTheme() {
 //        if let storedTheme = UserDefaults.standard.value(forKey: selectedThemeKey) as? Int{
@@ -17,24 +22,24 @@ struct ThemesHandler: ThemesHandlerProtocol {
 //      } else {
 //        return .classic
 //      }
-        ThemesHandler.currentTheme = RootAssembly.coreLayerAssembly.themeSaveHandler.readTheme(from: selectedThemeKey + ".txt")
+        currentTheme = self.themeSaveHandler?.readTheme(from: selectedThemeKey + ".txt")
     }
     
     func applyTheme(theme: Theme) {
 //        UserDefaults.standard.setValue(theme.rawValue, forKey: selectedThemeKey)
 //        UserDefaults.standard.synchronize()
-        ThemesHandler.currentTheme = theme
-        RootAssembly.coreLayerAssembly.themeSaveHandler.writeTheme(to: selectedThemeKey + ".txt", rawTheme: theme.rawValue)
+        currentTheme = theme
+        self.themeSaveHandler?.writeTheme(to: selectedThemeKey + ".txt", rawTheme: theme.rawValue)
     }
     
     func getTheme() -> Theme {
-        if let theme = ThemesHandler.currentTheme {
+        if let theme = currentTheme {
             return theme
         }
         
         loadTheme()
         
-        guard let probablyLoadedTheme = ThemesHandler.currentTheme else {
+        guard let probablyLoadedTheme = currentTheme else {
             return .classic
         }
         return probablyLoadedTheme

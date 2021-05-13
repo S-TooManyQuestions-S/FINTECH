@@ -22,7 +22,7 @@ class NetworkHandler: NetworkHandlerProtocol {
             case .success(let response):
                 resultHandler(response, nil)
             case .failure(let error):
-                resultHandler(nil, error.localizedDescription)
+                resultHandler(nil, error.message)
             }
         }
     }

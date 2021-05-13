@@ -16,7 +16,14 @@ enum NetworkError: Error {
     case badUrl(message: String)
     case badSession(message: String)
     case badDataWhileParsing(message: String)
-        
+    var message: String {
+        switch self {
+        case .badUrl(let message),
+             .badSession(let message),
+             .badDataWhileParsing(let message):
+            return message
+        }
+    }
 }
 
 class RequestSender: IRequestSender {

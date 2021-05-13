@@ -9,7 +9,8 @@ import Foundation
 
 class ServiceAssembly: IServicesAssemblyProtocol {
     
-    var themeHandler: ThemesHandlerProtocol = ThemesHandler()
+    var themeHandler: ThemesHandlerProtocol = ThemesHandler(themeSaveHandler:
+                                                                RootAssembly.coreLayerAssembly.themeSaveHandler)
     
     var userIDHandler: UserIdHandlerProtocol = UserIdHandler()
     

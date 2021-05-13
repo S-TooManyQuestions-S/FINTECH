@@ -81,10 +81,16 @@
                                     <action selector="profileButtonPressed:" destination="4ZS-lK-sJl" eventType="touchUpInside" id="gRw-Pa-ca3"/>
                                 </connections>
                             </button>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="profileButton"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <segue destination="ZKK-Yf-3ee" kind="presentation" identifier="ProfileID" customClass="MyCustomSegue" customModule="TinkoffChat" customModuleProvider="target" modalPresentationStyle="pageSheet" id="IV9-3I-8Vx"/>
                             </connections>
                         </barButtonItem>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="ConversationsNavBar"/>
+                        </userDefinedRuntimeAttributes>
                     </navigationItem>
                     <connections>
                         <outlet property="addNewChanelButton" destination="rYS-vO-Az7" id="75i-Z5-P3d"/>

@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct Response: Codable {
+struct Response: Codable, Equatable {
     let hits: [ResponseData]
 }
 
-struct ResponseData: Codable {
+struct ResponseData: Codable, Equatable {
     
     let id: Int
     let webformatUrl: String
