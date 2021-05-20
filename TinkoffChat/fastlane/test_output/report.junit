@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites name='TinkoffChatUITests.xctest' tests='3' failures='0'>
+  <testsuite name='TinkoffChatTests.TinkoffChatTests' tests='2' failures='0'>
+    <testcase classname='TinkoffChatTests.TinkoffChatTests' name='testNetworkHandler' time='0.063'/>
+    <testcase classname='TinkoffChatTests.TinkoffChatTests' name='testThemeHandler' time='0.034'/>
+  </testsuite>
+  <testsuite name='TinkoffChatUITests.TinkoffChatUITests' tests='1' failures='0'>
+    <testcase classname='TinkoffChatUITests.TinkoffChatUITests' name='testTextFields' time='0.138'/>
+  </testsuite>
+</testsuites>
