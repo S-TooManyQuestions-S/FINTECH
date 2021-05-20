@@ -1,0 +1,31 @@
+desc "Build for testing"
+lane :build_for_testing do |options|
+  cocoapods
+  scan(
+    build_for_testing: true
+  )
+  discord_hook = ENV['WEB_HOOK_DISCORD']
+  discord_user_id = ENV['USER_ID']
+
+  discord_notifier(
+    webhook_url: discord_hook,
+    title: "TinkoffAppTests",
+    description: "build ended",
+    discord_user_id: discord_user_id
+  )
+  puts "BUILD IS SUCCESSFULL"
+end
+
+desc "Test complete build"
+lane :test_complete_build do
+  scan(
+    test_without_building: true
+  )
+end
+
+desc "General call"
+lane :general_call do
+  build_for_testing
+  test_complete_build
+end
+
