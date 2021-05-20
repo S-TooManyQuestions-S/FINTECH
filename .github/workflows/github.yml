@@ -14,4 +14,4 @@ jobs:
         WEB_HOOK_DISCORD: $ {{ secrets.WEB_HOOK_DISCORD }} 
         USER_ID: ${{ secrets.USER_ID }}
       run: |
-        bundle exec fastlane general_call
+        cd TinkoffChat; bundle exec fastlane general_call
