@@ -10,7 +10,7 @@ lane :build_for_testing do |options|
   discord_notifier(
     webhook_url: discord_hook,
     title: "TinkoffAppTests",
-    description: "build ended",
+    description: "BUILD ENDED",
     discord_user_id: discord_user_id
   )
   puts "BUILD IS SUCCESSFULL"
