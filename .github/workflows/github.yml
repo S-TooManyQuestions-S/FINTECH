@@ -11,7 +11,7 @@ jobs:
         bundler-cache: true
     - name: Run tests
       env:
-        WEB_HOOK_DISCORD: $ {{ secrets.WEB_HOOK_DISCORD }} 
+        WEB_HOOK_DISCORD: ${{ secrets.WEB_HOOK_DISCORD }}
         USER_ID: ${{ secrets.USER_ID }}
       run: |
         cd TinkoffChat; gem install bundler; bundle install; bundle exec fastlane general_call
