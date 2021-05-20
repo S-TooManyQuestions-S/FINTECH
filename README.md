@@ -1,2 +1,2 @@
 # FINTECH
-![TooManyQuestionsCI](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
+![TooManyQuestionsCI](https://github.com/S-TooManyQuestions-S/FINTECH/actions/workflows/github.yml/badge.svg)
